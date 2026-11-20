@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 4184",
     "build": "vite build",
+    "build:live": "node tools/build-live.mjs",
     "preview": "vite preview --port 4185"
   },
   "devDependencies": {

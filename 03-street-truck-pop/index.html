@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waffle Truck — Street food &amp; bubble tea · Grand Mail Saint-Paul-lès-Dax</title>
+  <meta name="description" content="Waffle Truck, le kiosque street food du Grand Mail à Saint-Paul-lès-Dax : OVNI burgers, bubble waffles, bubble tea, churros, glaces. Ouvert du lundi au samedi dès 11h.">
+  <meta name="theme-color" content="#ffd23f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23ff8a1f%22/%3E%3Cpath d=%22M4 11h24M4 21h24M11 4v24M21 4v24%22 stroke=%22%233a1f12%22 stroke-width=%223%22/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/img/photo/kiosque-grand-mail.webp">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip" href="#menu">Aller au menu</a>
+  <header class="top">
+    <a href="#top" class="logo" aria-label="Waffle Truck, accueil"><span class="grid-ico" aria-hidden="true"></span>WAFFLE TRUCK</a>
+    <p class="status" data-status><span class="dot" aria-hidden="true"></span><span data-status-txt>…</span></p>
+    <nav aria-label="Sections"><a href="#menu">Menu</a><a href="#bubble">Bubble tea</a><a href="#spot">Le spot</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="h1">
+      <h1 id="h1" class="mega"><span class="l1">Waffle</span><span class="l2">Truck</span></h1>
+      <figure class="polaroid main">
+        <img src="/img/photo/kiosque-grand-mail.webp" alt="Le kiosque Waffle Truck au Grand Mail de Saint-Paul-lès-Dax" fetchpriority="high">
+        <figcaption>Grand Mail · Saint-Paul-lès-Dax</figcaption>
+      </figure>
+      <div class="stickers" aria-hidden="true">
+        <img src="/img/cut/bubble-waffle.webp" class="stk s1" alt="">
+        <img src="/img/cut/bt-mangue-logo.webp" class="stk s2" alt="">
+        <img src="/img/cut/area-51.webp" class="stk s3" alt="">
+        <img src="/img/cut/churros.webp" class="stk s4" alt="">
+      </div>
+      <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="circ" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="98"/>
+        <text><textPath href="#circ">GOOD FOOD · GOOD MOOD · FAIT MAISON · </textPath></text>
+        <text x="100" y="114" text-anchor="middle" class="mid">2019</text>
+      </svg>
+      <p class="hero-lead">OVNI burgers, bubble waffles, bubble tea &amp; churros. Le kiosque qui met de bonne humeur, du lundi au samedi dès 11h.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn">Voir le menu</a>
+        <a class="btn btn-ink" data-maps target="_blank" rel="noopener">Itinéraire</a>
+      </div>
+    </section>
+
+    <div class="marquees" aria-hidden="true">
+      <div class="mq a"><div class="mq-t"></div></div>
+      <div class="mq b"><div class="mq-t"></div></div>
+    </div>
+
+    <section id="menu" class="menu" aria-labelledby="menu-h">
+      <header class="menu-head">
+        <h2 id="menu-h" class="h2">Le menu <span class="hl">qui claque</span></h2>
+        <p>Tous les prix, sans surprise. Scrolle, les cartes s'empilent.</p>
+      </header>
+      <div class="stack" data-stack></div>
+    </section>
+
+    <section id="bubble" class="bubble" aria-labelledby="bt-h">
+      <div class="bt-cup-wrap">
+        <svg class="cup" viewBox="0 0 220 320" role="img" aria-label="Aperçu de ton bubble tea">
+          <defs><clipPath id="cupClip"><path d="M38 92 L182 92 L164 300 Q162 312 150 312 L70 312 Q58 312 56 300 Z"/></clipPath></defs>
+          <rect class="straw" x="122" y="6" width="16" height="150" rx="8" transform="rotate(12 130 80)"/>
+          <g clip-path="url(#cupClip)">
+            <rect class="tea" x="0" y="110" width="220" height="220"/>
+            <g class="pearls"></g>
+            <rect class="shine" x="58" y="92" width="16" height="220" rx="8"/>
+          </g>
+          <path class="cup-line" d="M38 92 L182 92 L164 300 Q162 312 150 312 L70 312 Q58 312 56 300 Z"/>
+          <path class="lid" d="M28 92 Q110 30 192 92 Z"/>
+          <rect class="rim" x="24" y="86" width="172" height="12" rx="6"/>
+          <g class="cup-logo"><circle cx="110" cy="200" r="34"/><text x="110" y="196" text-anchor="middle">WAFFLE</text><text x="110" y="212" text-anchor="middle">TRUCK</text></g>
+        </svg>
+        <p class="bt-price"><strong data-bt-price>5,00 €</strong><span data-bt-recap></span></p>
+      </div>
+      <div class="bt-ui">
+        <h2 id="bt-h" class="h2">Compose ton <span class="hl pink">bubble tea</span></h2>
+        <div class="bt-group" data-g="base"><h3>1. Ta base</h3><div class="chips"></div></div>
+        <div class="bt-group" data-g="sirop"><h3>2. Ton sirop</h3><div class="chips"></div></div>
+        <div class="bt-group" data-g="perle"><h3>3. Tes perles</h3><div class="chips"></div></div>
+        <div class="bt-group" data-g="size"><h3>4. Ta taille</h3><div class="chips"></div></div>
+        <p class="small">Thés de qualité · Fait maison · Frais, gourmand, unique</p>
+      </div>
+    </section>
+
+    <section class="fresh" aria-labelledby="fresh-h">
+      <h2 id="fresh-h" class="h2">Frais &amp; <span class="hl mint">glacé</span></h2>
+      <div class="fresh-grid" data-fresh></div>
+    </section>
+
+    <section id="spot" class="spot" aria-labelledby="spot-h">
+      <div class="spot-pics">
+        <figure class="polaroid p1"><img src="/img/photo/terrasse.webp" alt="La terrasse du Waffle Truck" loading="lazy"><figcaption>La terrasse</figcaption></figure>
+        <figure class="polaroid p2"><img src="/img/photo/kiosque-face.webp" alt="La façade en bois du kiosque" loading="lazy"><figcaption>Le kiosque</figcaption></figure>
+      </div>
+      <div class="ticket">
+        <h2 id="spot-h" class="h2">Le spot</h2>
+        <address data-address></address>
+        <table class="hours" data-hours></table>
+        <p class="small" data-services></p>
+        <div class="score">
+          <p><b data-count="4.3" data-dec="1">4,3</b><span>★ Google</span></p>
+          <p><b data-count="220">220</b><span>avis</span></p>
+        </div>
+        <a class="btn" data-maps target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+      </div>
+      <div class="quotes" data-reviews></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="logo"><span class="grid-ico" aria-hidden="true"></span>WAFFLE TRUCK</p>
+    <p>Good food. Good mood. · Depuis 2019 · Site de démonstration</p>
+  </footer>
+
+  <nav class="thumb-bar" aria-label="Actions rapides">
+    <a data-maps target="_blank" rel="noopener">📍 Itinéraire</a>
+    <a data-tel>📞 Appeler</a>
+  </nav>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

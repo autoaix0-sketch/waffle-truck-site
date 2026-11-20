@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waffle Truck — Bubble waffles &amp; douceurs maison · Saint-Paul-lès-Dax</title>
+  <meta name="description" content="Bubble waffles à composer, glaces, crêpes, churros, cafés gourmands et OVNI burgers. Waffle Truck, Grand Mail, Saint-Paul-lès-Dax. Fait maison tous les jours.">
+  <meta name="theme-color" content="#fff6e8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23ff8a1f%22/%3E%3Cpath d=%22M4 11h24M4 21h24M11 4v24M21 4v24%22 stroke=%22%233a1f12%22 stroke-width=%223%22/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/img/photo/terrasse.webp" media="(min-width: 901px)">
+  <link rel="preload" as="image" href="/img/photo/kiosque-grand-mail.webp" media="(max-width: 900px)">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip" href="#carte">Aller à la carte</a>
+  <header class="nav">
+    <a href="#top" class="brand" aria-label="Waffle Truck, accueil"><img src="/img/logo.png" alt="Waffle Truck" width="207" height="92"></a>
+    <nav aria-label="Sections"><a href="#compose">Bubble waffle</a><a href="#carte">La carte</a><a href="#trompe">Nouveau</a><a href="#lieu">Le kiosque</a><a href="#infos">Horaires</a></nav>
+    <a class="btn btn-sm" data-maps target="_blank" rel="noopener" data-magnetic>Itinéraire</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="h1">
+      <picture class="hero-photo">
+        <source media="(max-width: 900px)" srcset="/img/photo/kiosque-grand-mail.webp">
+        <img src="/img/photo/terrasse.webp" alt="Le kiosque Waffle Truck et sa terrasse au Grand Mail de Saint-Paul-lès-Dax" fetchpriority="high">
+      </picture>
+      <div class="hero-txt">
+        <p class="status" data-status><span class="dot" aria-hidden="true"></span><span data-status-txt>Lun – sam · 11h – 18h30</span></p>
+        <h1 id="h1" class="display">Waffle Truck</h1>
+        <p class="lead">Bubble waffles, OVNI burgers, glaces, crêpes et bubble tea. Fait maison, au Grand Mail de Saint-Paul-lès-Dax.</p>
+        <div class="cta-row">
+          <a href="#carte" class="btn">Voir la carte</a>
+          <a class="btn btn-light" data-maps target="_blank" rel="noopener">Itinéraire</a>
+        </div>
+        <p class="hero-rate"><b>4,3 ★</b> sur Google · 220 avis</p>
+      </div>
+      <!-- scroll "camera": the photo zooms into the round sign, the sign opens on this scene -->
+      <div class="portal" aria-hidden="true">
+        <div class="portal-in">
+          <img src="/img/cut/bubble-waffle.webp" class="portal-waffle" alt="" loading="lazy">
+          <div class="portal-tags"></div>
+          <p class="portal-line">Ta waffle, tes envies.</p>
+        </div>
+      </div>
+      <p class="scroll-hint" aria-hidden="true"><span></span>Descends pour entrer</p>
+    </section>
+
+    <!-- BUILDER -->
+    <section id="compose" class="compose" aria-labelledby="compose-h">
+      <div class="stage">
+        <div class="stage-inner">
+          <h2 id="compose-h" class="h2">Compose ton plaisir&nbsp;!</h2>
+          <p class="intro">La base est à 3,50 €. Ensuite, tu ajoutes ce que tu veux. Ta waffle, tes envies.</p>
+          <div class="plate">
+            <img src="/img/cut/bubble-waffle.webp" alt="Ta bubble waffle" class="plate-waffle" loading="lazy">
+            <div class="toppings" aria-hidden="true"></div>
+          </div>
+          <p class="sum"><span>Ta waffle</span><strong data-sum aria-live="polite">3,50 €</strong></p>
+          <p class="recap" data-recap>Base nature</p>
+        </div>
+      </div>
+      <ol class="build-steps" data-build></ol>
+    </section>
+
+    <!-- CARTE : horizontal panels -->
+    <section id="carte" class="carte" aria-labelledby="carte-h">
+      <div class="carte-pin">
+        <header class="carte-head">
+          <h2 id="carte-h" class="h2">La carte</h2>
+          <p class="carte-sub">Les mêmes prix qu'au kiosque.</p>
+          <div class="carte-progress" aria-hidden="true"><span></span></div>
+        </header>
+        <div class="panels" data-panels></div>
+      </div>
+    </section>
+
+    <!-- TROMPE-L'OEIL : new pastries (photos 19 Nov 2026, no prices yet) -->
+    <section id="trompe" class="trompe" aria-labelledby="trompe-h">
+      <div class="trompe-txt">
+        <p class="eyebrow"><span class="new-tag">Nouveau</span></p>
+        <h2 id="trompe-h" class="h2">Les trompe-l&rsquo;&oelig;il</h2>
+        <p class="lead">Des p&acirc;tisseries qui ressemblent &agrave; de vrais fruits. Framboise, citron, cacahu&egrave;te, mangue&hellip; On croit voir un fruit, on croque un dessert.</p>
+        <p class="small">Prix et parfums du jour au kiosque.</p>
+      </div>
+      <div class="trompe-grid">
+        <figure class="tcard t1"><img src="/img/photo/trompe-framboise.webp" alt="P&acirc;tisserie trompe-l&rsquo;&oelig;il framboise devant le kiosque Waffle Truck" loading="lazy" width="1179" height="1165"><figcaption>Framboise</figcaption></figure>
+        <figure class="tcard t2"><img src="/img/photo/trompe-cacahuete.webp" alt="P&acirc;tisserie trompe-l&rsquo;&oelig;il en forme de cacahu&egrave;te" loading="lazy" width="901" height="1200"><figcaption>Cacahu&egrave;te</figcaption></figure>
+        <figure class="tcard t3"><img src="/img/photo/trompe-citron.webp" alt="P&acirc;tisserie trompe-l&rsquo;&oelig;il en forme de citron" loading="lazy" width="1108" height="1200"><figcaption>Citron</figcaption></figure>
+        <figure class="tcard t4"><img src="/img/photo/trompe-collection.webp" alt="Plusieurs p&acirc;tisseries trompe-l&rsquo;&oelig;il : citron, coco, mangue, chocolat" loading="lazy" width="1179" height="671"><figcaption>Toute la collection</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- GALERIE : real photos -->
+    <section id="photos" class="galerie" aria-labelledby="galerie-h">
+      <h2 id="galerie-h" class="h2">En vrai</h2>
+      <p class="lead">Nos plats et nos boissons, tels qu&rsquo;on les sert.</p>
+      <div class="galerie-grid">
+        <figure><img src="/img/photo/vrai-crousty.webp" alt="Bol crousty riz, sauce barbecue et sauce blanche, sur la terrasse" loading="lazy" width="900" height="1200"><figcaption>Crousty riz</figcaption></figure>
+        <figure><img src="/img/photo/vrai-milkshakes.webp" alt="Deux milkshakes gourmands avec chantilly, chocolat et Oreo" loading="lazy" width="900" height="1200"><figcaption>Milkshakes gourmands</figcaption></figure>
+        <figure><img src="/img/photo/vrai-churros.webp" alt="Churros, frites et boisson sur un plateau" loading="lazy" width="904" height="1200"><figcaption>Churros &amp; frites</figcaption></figure>
+        <figure class="wide"><img src="/img/photo/vrai-ovni.webp" alt="Deux burgers OVNI, dont un coup&eacute; avec le fromage qui coule" loading="lazy" width="1179" height="775"><figcaption>Les OVNI</figcaption></figure>
+        <figure><img src="/img/photo/vrai-milkshake-bueno.webp" alt="Milkshake Bueno avec chantilly et barres chocolat&eacute;es" loading="lazy" width="673" height="1200"><figcaption>Milkshake Bueno</figcaption></figure>
+        <figure><img src="/img/photo/vrai-coupes-fruits.webp" alt="Deux coupes gourmandes aux fruits frais et chantilly" loading="lazy" width="900" height="1200"><figcaption>Coupes gourmandes</figcaption></figure>
+        <figure><img src="/img/photo/vrai-bubble-tea.webp" alt="Bubble tea au lait avec perles &agrave; la fraise" loading="lazy" width="900" height="1200"><figcaption>Bubble tea</figcaption></figure>
+        <figure><img src="/img/photo/vrai-crousty-citron.webp" alt="Bol crousty avec une rondelle de citron" loading="lazy" width="900" height="1200"><figcaption>Crousty</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- LIEU -->
+    <section id="lieu" class="lieu" aria-labelledby="lieu-h">
+      <div class="lieu-txt">
+        <h2 id="lieu-h" class="h2">Le kiosque</h2>
+        <p class="lead">Un kiosque en bois au Grand Mail, avec une terrasse, des tables et des parasols. Vous mangez sur place, vous emportez, ou on vous livre.</p>
+      </div>
+      <figure class="reveal-img big"><picture>
+        <source media="(max-width: 900px)" srcset="/img/photo/terrasse.webp">
+        <img src="/img/photo/kiosque-grand-mail.webp" alt="Le kiosque Waffle Truck au Grand Mail, avec sa terrasse" loading="lazy">
+      </picture></figure>
+      <div class="posters">
+        <p class="posters-h">Les affiches du comptoir</p>
+        <div class="posters-row">
+          <img src="/img/photo/affiche-bubble-waffle.webp" alt="Affiche Bubble Waffle : compose ton plaisir" loading="lazy">
+          <img src="/img/photo/affiche-ovni.webp" alt="Affiche Les OVNI, les burgers venus d'ailleurs" loading="lazy">
+          <img src="/img/photo/affiche-desserts.webp" alt="Affiche La pause ultra gourmande : churros, crêpes, beignets" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- AVIS -->
+    <section class="avis" aria-label="Avis clients">
+      <p class="avis-h">Ce que disent les clients sur Google <span>(avis résumés)</span></p>
+      <div class="avis-track" data-reviews></div>
+    </section>
+
+    <!-- INFOS -->
+    <section id="infos" class="infos" aria-labelledby="infos-h">
+      <div>
+        <h2 id="infos-h" class="h2">Venir au kiosque</h2>
+        <address data-address></address>
+        <div class="cta-row">
+          <a class="btn" data-maps target="_blank" rel="noopener" data-magnetic>Itinéraire</a>
+          <a class="btn btn-line" data-tel>Appeler</a>
+        </div>
+        <p class="socials" data-socials></p>
+      </div>
+      <div class="hours-card">
+        <h3>Horaires</h3>
+        <table class="hours" data-hours></table>
+        <p class="small" data-services></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="brand">Waffle Truck</p>
+    <p class="socials" data-socials></p>
+    <p>Good food. Good mood. · Des produits de qualité · Depuis 2019</p>
+    <p class="small">Site de démonstration</p>
+  </footer>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

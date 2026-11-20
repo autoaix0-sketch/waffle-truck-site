@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waffle Truck — 3 propositions de site</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23ff8a1f%22/%3E%3Cpath d=%22M4 11h24M4 21h24M11 4v24M21 4v24%22 stroke=%22%233a1f12%22 stroke-width=%223%22/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,800&family=Unbounded:wght@900&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #f6efe6; --ink: #1b1410; --muted: #6d6158; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.5 'DM Sans', system-ui, sans-serif; }
+    header { padding: 56px 5vw 30px; max-width: 1300px; margin: 0 auto; }
+    h1 { font: 800 clamp(36px, 5vw, 64px)/1 'Fraunces', serif; margin: 0 0 12px; }
+    header p { color: var(--muted); max-width: 60ch; margin: 0; }
+    main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding: 20px 5vw 80px; max-width: 1300px; margin: 0 auto; }
+    a.card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border-radius: 26px; overflow: hidden; box-shadow: 0 20px 50px -25px rgba(0, 0, 0, .45); transition: transform .4s cubic-bezier(.2, .9, .3, 1.2); }
+    a.card:hover, a.card:focus-visible { transform: translateY(-8px) rotate(-.6deg); }
+    .top { position: relative; height: 300px; display: grid; place-items: center; overflow: hidden; }
+    .top img { height: 82%; width: auto; position: relative; filter: drop-shadow(0 20px 24px rgba(0, 0, 0, .35)); transition: transform .5s; }
+    a.card:hover .top img { transform: scale(1.08) rotate(-4deg); }
+    .top b { position: absolute; left: 20px; top: 16px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+    .bottom { padding: 22px 24px 26px; background: #fff; flex: 1; }
+    .bottom h2 { margin: 0 0 6px; font-size: 28px; line-height: 1; }
+    .bottom p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+    .go { font-weight: 700; }
+    .c1 .top { background: radial-gradient(circle at 50% 70%, #3a1fb0, #0b0820 70%); color: #c6ff3d; }
+    .c1 h2 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 24px; }
+    .c2 .top { background: radial-gradient(circle at 50% 55%, #ffd37a, #f2b544 45%, #fff6e8 46%); color: #c8691c; }
+    .c2 h2 { font-family: 'Fraunces', serif; font-weight: 800; }
+    .c3 .top { background: #ffd23f; color: #14110f; background-image: radial-gradient(rgba(20, 17, 15, .14) 1.5px, transparent 1.5px); background-size: 18px 18px; }
+    .c3 h2 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 34px; }
+    footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 5vw 40px; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } .top { height: 240px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Waffle Truck — 3 propositions</h1>
+    <p>Trois styles de site pour le kiosque du Grand Mail. Même menu, mêmes prix, trois ambiances. Ouvrez-les sur votre téléphone.</p>
+  </header>
+  <main>
+    <a class="card c1" href="/01-cosmic-ovni/">
+      <div class="top"><b>01</b><img src="/img/cut/area-51.webp" alt=""></div>
+      <div class="bottom"><h2>Cosmic OVNI</h2><p>Nuit étoilée, néon, le burger atterrit comme un OVNI. Planète bubble waffle et galaxie de boissons.</p><span class="go">Voir la démo →</span></div>
+    </a>
+    <a class="card c2" href="/02-golden-crunch/">
+      <div class="top"><b>02</b><img src="/img/cut/bubble-waffle.webp" alt=""></div>
+      <div class="bottom"><h2>Golden Crunch</h2><p>La vraie photo du kiosque en grand, les mots des affiches, bubble waffle à composer en direct, carte qui défile.</p><span class="go">Voir la démo →</span></div>
+    </a>
+    <a class="card c3" href="/03-street-truck-pop/">
+      <div class="top"><b>03</b><img src="/img/cut/bt-fruits-rouges.webp" alt=""></div>
+      <div class="bottom"><h2>Street Truck Pop</h2><p>Stickers, couleurs, cartes qui s'empilent. Bubble tea à composer, « ouvert / fermé » en direct, boutons au pouce.</p><span class="go">Voir la démo →</span></div>
+    </a>
+  </main>
+  <footer>Démos préparées pour Waffle Truck · Grand Mail, Saint-Paul-lès-Dax</footer>
+</body>
+</html>

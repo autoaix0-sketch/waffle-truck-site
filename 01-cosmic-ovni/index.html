@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waffle Truck — Les burgers venus d'ailleurs · Saint-Paul-lès-Dax</title>
+  <meta name="description" content="Waffle Truck au Grand Mail de Saint-Paul-lès-Dax : OVNI burgers pressés, bubble waffles, bubble tea, glaces et cafés gourmands. Fait maison tous les jours.">
+  <meta name="theme-color" content="#0b0820">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23ff8a1f%22/%3E%3Cpath d=%22M4 11h24M4 21h24M11 4v24M21 4v24%22 stroke=%22%233a1f12%22 stroke-width=%223%22/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/img/cut/area-51.webp">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip" href="#ovni">Aller au menu</a>
+  <header class="nav">
+    <a href="#top" class="brand" aria-label="Waffle Truck, accueil"><span class="grid-ico" aria-hidden="true"></span>WAFFLE<b>TRUCK</b></a>
+    <nav aria-label="Sections">
+      <a href="#ovni">OVNI</a><a href="#planete">Bubble waffle</a><a href="#galaxie">Boissons</a><a href="#base">Nous trouver</a>
+    </nav>
+    <a class="btn btn-sm" data-magnetic data-maps target="_blank" rel="noopener">Itinéraire</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO : the UFO burger lands -->
+    <section class="hero" aria-labelledby="h1">
+      <canvas class="stars" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <p class="kicker">Grand Mail · Saint-Paul-lès-Dax</p>
+        <h1 id="h1" class="title" data-split>Les burgers venus d'ailleurs</h1>
+        <p class="lead">Pain pressé, fromage fondu, sauces maison. Atterrissage tous les jours dès 11h.</p>
+        <div class="cta-row">
+          <a href="#ovni" class="btn" data-magnetic>Voir les OVNI</a>
+          <a class="btn btn-ghost" data-tel>Appeler</a>
+        </div>
+      </div>
+      <div class="ufo-wrap" aria-hidden="true">
+        <div class="beam"></div>
+        <img src="/img/cut/area-51.webp" alt="" class="ufo" fetchpriority="high">
+        <div class="ground"></div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">scroll</div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="track"></div></div>
+
+    <!-- OVNI -->
+    <section id="ovni" class="sec">
+      <header class="sec-head">
+        <p class="kicker">Les OVNI · burgers pressés</p>
+        <h2 class="h2" data-split>Trois objets non identifiés. Très bien identifiés par vos papilles.</h2>
+      </header>
+      <div class="ovni-cards" data-ovni></div>
+      <div class="formulas" data-formulas="ovni"></div>
+      <p class="small center" data-dessert></p>
+
+      <div class="winter" data-reveal>
+        <div class="winter-txt">
+          <p class="kicker">Mission hiver</p>
+          <h3 class="h3">Les OVNI d'hiver</h3>
+          <ul class="winter-list" data-winter></ul>
+          <div class="pill-row" data-winter-menus></div>
+        </div>
+        <div class="winter-img" data-winter-img></div>
+      </div>
+    </section>
+
+    <!-- PLANETE BUBBLE WAFFLE -->
+    <section id="planete" class="planet" aria-labelledby="planet-h">
+      <div class="planet-pin">
+        <div class="planet-txt">
+          <p class="kicker">Planète Bubble Waffle</p>
+          <h2 id="planet-h" class="h2">Compose ton plaisir</h2>
+          <p class="lead">6 étapes. Une galaxie de combinaisons.</p>
+          <p class="total">Total <strong data-total>3,50 €</strong></p>
+        </div>
+        <div class="orbit">
+          <div class="ring" aria-hidden="true"></div>
+          <img src="/img/cut/bubble-waffle.webp" alt="Bubble waffle glace, fraises, Oreo et chocolat" class="planet-img" loading="lazy">
+          <ol class="steps" data-steps></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- CROUSTILLE -->
+    <section id="croustille" class="sec">
+      <header class="sec-head">
+        <p class="kicker">La pause qui croustille</p>
+        <h2 class="h2" data-split>Bowls &amp; sandwichs</h2>
+      </header>
+      <div class="grid-4" data-reveal-group data-savory></div>
+      <div class="formulas" data-formulas="sandwich"></div>
+      <p class="small center"><span data-dessert></span></p>
+      <div class="kids" data-reveal data-kids></div>
+    </section>
+
+    <!-- GALAXIE DES BOISSONS : horizontal scroll -->
+    <section id="galaxie" class="hz" aria-labelledby="gal-h">
+      <div class="hz-pin">
+        <header class="hz-head">
+          <p class="kicker">La galaxie des boissons</p>
+          <h2 id="gal-h" class="h2">Chaud, froid, à perles</h2>
+        </header>
+        <div class="hz-track" data-drinks></div>
+      </div>
+    </section>
+
+    <!-- DESSERTS & GLACES -->
+    <section id="desserts" class="sec">
+      <header class="sec-head">
+        <p class="kicker">La pause ultra gourmande</p>
+        <h2 class="h2" data-split>Desserts &amp; glaces</h2>
+      </header>
+      <div class="grid-4" data-reveal-group data-desserts></div>
+      <h3 class="h3 center">Glaces</h3>
+      <p class="small center" data-glace-note></p>
+      <div class="scoops" data-scoops aria-label="Parfums de glace"></div>
+      <div class="pill-row center-row" data-glace-formats></div>
+      <h3 class="h3 center" style="margin-top:56px">Nos coupes les plus vendues</h3>
+      <div class="coupes" data-reveal-group data-coupes></div>
+    </section>
+
+    <!-- AVIS -->
+    <section class="sec reviews" aria-labelledby="rev-h">
+      <div class="rating" data-reveal>
+        <p class="big"><span data-count="4.3" data-dec="1">4,3</span><small>/5</small></p>
+        <p id="rev-h"><span data-count="220">220</span> avis Google</p>
+      </div>
+      <div class="quotes" data-reveal-group data-reviews></div>
+    </section>
+
+    <!-- BASE TERRESTRE -->
+    <section id="base" class="sec base" aria-labelledby="base-h">
+      <div class="porthole" data-reveal><img src="/img/photo/terrasse.webp" alt="La terrasse et le kiosque Waffle Truck au Grand Mail" loading="lazy"></div>
+      <div class="base-txt">
+        <p class="kicker">Base terrestre</p>
+        <h2 id="base-h" class="h2">Nous trouver</h2>
+        <address data-address></address>
+        <table class="hours" data-hours></table>
+        <p class="small" data-services></p>
+        <div class="cta-row">
+          <a class="btn" data-maps target="_blank" rel="noopener" data-magnetic>Itinéraire</a>
+          <a class="btn btn-ghost" data-tel>Appeler</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="brand"><span class="grid-ico" aria-hidden="true"></span>WAFFLE<b>TRUCK</b></p>
+    <p>Good food. Good mood. · Fait maison tous les jours · Depuis 2019</p>
+    <p class="small">Site de démonstration</p>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

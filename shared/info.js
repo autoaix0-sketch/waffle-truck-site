@@ -31,7 +31,7 @@ export const info = {
 // "Les chouchous": the 3 most loved items on Uber Eats (23 Nov 2026), in that order.
 // Kiosk price only when the kiosk menu has it (menu.js); never the Uber price.
 export const favoris = [
-  { rank: 'N°1', name: 'Crousty Frites', text: 'Frites maison, poulet crousty, sauce cheddar et sauce blanche, oignons frits.', price: '9,90 €', img: ['cut/crousty-bowl.webp'] },
+  { rank: 'N°1', name: 'Crousty Frites', text: 'Poulet crousty bien croustillant, sauce blanche et filet de sauce barbecue.', price: '9,90 €', img: ['cut/crousty-bowl.webp'] },
   { rank: 'N°2', name: 'Bubble Banane Nutella', text: 'La bubble waffle croustillante, Nutella et banane fraîche.', price: '5,70 €', img: ['cut/bubble-banane-cup.webp'] }, // 5,70 = base 3,50 + coulis Nutella 1 + fruits 1,20
   { rank: 'N°3', name: 'Menu Kebab', text: 'Le kebab avec salade, tomates, oignons et sauce au choix. Frites maison et boisson.', price: '12,90 €', img: ['cut/kebab.webp', 'cut/frites-box.webp'] },
 ]

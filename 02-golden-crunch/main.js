@@ -132,7 +132,7 @@ function deck() {
   box.innerHTML = favoris.map((f, i) => `
     <article class="dcard" data-i="${i}" aria-roledescription="carte" aria-label="${f.rank} : ${f.name}">
       <span class="dc-rank">${f.rank} le plus aimé</span>
-      <div class="dc-art${f.img.length > 1 ? ' duo' : ''}">${f.img.map((s) => img(s, '')).join('')}</div>
+      <div class="dc-art${f.img.length > 1 ? ' duo' : ''}">${f.img.map((s) => img(s, '').replace('loading="lazy"', '')).join('')}</div>
       <h3 class="dc-name">${f.name}</h3>
       <p class="dc-text">${f.text}</p>
       <div class="dc-foot"><span class="dc-price">${f.price}<small>au kiosque</small></span><a class="dc-link" href="#carte">Voir la carte</a></div>

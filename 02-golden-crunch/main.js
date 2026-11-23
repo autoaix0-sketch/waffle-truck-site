@@ -100,7 +100,7 @@ update()
 
 /* ---------- carte panels ---------- */
 const P = []
-P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/crousty-frites.webp', 'Crousty frites')}${img('cut/poulet-bbq.webp', 'Sandwich poulet BBQ')}</div></div><div>
+P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/crousty-bowl.webp', 'Bol crousty : poulet croustillant, sauce blanche et sauce barbecue')}${img('cut/poulet-bbq.webp', 'Sandwich poulet BBQ')}</div></div><div>
   <h3>La pause qui croustille</h3><p class="sub">Bowls &amp; sandwichs</p>
   <ul class="mlist">${sandwiches.bowls.map((b) => row(b.name, b.price, b.note)).join('')}${sandwiches.items.map((s) => row(s.name, 'dès 9,90 €', s.desc)).join('')}${row(sandwiches.kids.name, sandwiches.kids.price, sandwiches.kids.desc)}</ul>
   <h4>Kebab ou Poulet BBQ en formule</h4>${fbox(formulas.sandwich)}<p class="note">${formulas.dessertChoice}</p></div></article>`)

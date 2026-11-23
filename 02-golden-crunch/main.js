@@ -293,7 +293,8 @@ function heroTitle() {
   addEventListener('resize', () => (pos = null))
   return function titleFrame(p, cx, cy) {
     if (p <= 0.002) { if (live) { gsap.set(L, BASE); live = false } return }
-    if (!live) { intro.progress(1).kill(); gsap.set(L, BASE); if (!pos) where(); live = true }
+    if (!live) { intro.progress(1).kill(); gsap.set(L, BASE); live = true }
+    if (!pos) where() // also after a resize mid-scroll (phone address bar, rotation)
     L.forEach((el, i) => {
       const k = clamp((p - i * 0.012) / 0.2), e = inE(k)
       gsap.set(el, { x: (cx - pos[i][0]) * e, y: (cy - pos[i][1]) * e, scale: 1 - 0.92 * e, rotate: (i % 2 ? 1 : -1) * 240 * e, opacity: 1 - clamp((k - 0.75) / 0.25) })

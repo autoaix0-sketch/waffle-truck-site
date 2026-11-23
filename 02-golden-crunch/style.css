@@ -417,13 +417,13 @@ address a { color: var(--caramel); font-weight: 700; }
 /* ---------- brand marks from the kiosk sign (23 Nov 2026) ---------- */
 .brand .logo-script { height: 48px; width: auto; aspect-ratio: 230 / 64; color: var(--choco); display: block; }
 .logo-script, .badge { text-transform: none; letter-spacing: 0; font-weight: 400; }
-.badge { display: block; width: 140px; height: 140px; }
-.badge-foot { width: 150px; height: 150px; margin: 0 auto 18px; }
+.badge { display: block; width: 140px; height: auto; aspect-ratio: 1; border-radius: 50%; }
+.badge-foot { width: 150px; margin: 0 auto 18px; }
 .lieu-txt { position: relative; }
-.badge-lieu { position: absolute; right: 0; top: -20px; width: clamp(110px, 12vw, 170px); height: auto; aspect-ratio: 1; rotate: 8deg;
-  filter: drop-shadow(0 14px 18px rgba(58, 31, 18, .25)); }
+.badge-lieu { position: absolute; right: 0; top: -20px; width: clamp(110px, 12vw, 170px); rotate: 8deg;
+  box-shadow: 0 0 0 3px var(--choco), 0 16px 26px -10px rgba(58, 31, 18, .4); }
 @media (max-width: 900px) {
   .brand .logo-script { height: 44px; }
   .badge-lieu { width: 96px; top: -34px; right: -4px; }
-  .badge-foot { width: 130px; height: 130px; }
+  .badge-foot { width: 130px; }
 }

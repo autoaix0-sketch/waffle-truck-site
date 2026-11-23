@@ -31,9 +31,20 @@ export const info = {
 // "Les chouchous": the 3 most loved items on Uber Eats (23 Nov 2026), in that order.
 // Kiosk price only when the kiosk menu has it (menu.js); never the Uber price.
 export const favoris = [
-  { rank: 'N°1', name: 'Crousty Frites', text: 'Poulet crousty bien croustillant, sauce blanche et filet de sauce barbecue.', price: '9,90 €', img: ['cut/crousty-bowl.webp'] },
-  { rank: 'N°2', name: 'Bubble Banane Nutella', text: 'La bubble waffle croustillante, Nutella et banane fraîche.', price: '5,70 €', img: ['cut/bubble-banane-cup.webp'] }, // 5,70 = base 3,50 + coulis Nutella 1 + fruits 1,20
-  { rank: 'N°3', name: 'Menu Kebab', text: 'Le kebab avec salade, tomates, oignons et sauce au choix. Frites maison et boisson.', price: '12,90 €', img: ['cut/kebab.webp', 'cut/frites-box.webp'] },
+  { rank: 'N°1', name: 'Crousty Frites', text: 'Frites maison, poulet crousty, sauce cheddar et sauce blanche, oignons frits.', price: '9,90 €', photo: 'photo/ue-crousty-frites.webp' },
+  { rank: 'N°2', name: 'Bubble Banane Nutella', text: 'La bubble waffle croustillante, Nutella et banane fraîche.', price: '5,70 €', photo: 'photo/ue-bubble-banane-nutella.webp' }, // 5,70 = base 3,50 + coulis Nutella 1 + fruits 1,20
+  { rank: 'N°3', name: 'Menu Kebab', text: 'Le kebab avec salade, tomates, oignons et sauce au choix. Frites maison et boisson.', price: '12,90 €', photo: 'photo/ue-menu-kebab.webp' },
+]
+
+// Owner's Uber Eats photos shown in "Livré chez toi" (23 Nov 2026). Names as on Uber Eats, no prices.
+export const surUber = [
+  ['Duo Kebab', 'photo/ue-duo-kebab.webp'],
+  ['2 Crousty Riz', 'photo/ue-2-crousty-riz.webp'],
+  ['Crousty Riz', 'photo/ue-crousty-riz.webp'],
+  ['Menu Crousty Barbecue', 'photo/ue-menu-crousty-barbecue.webp'],
+  ['Tenders', 'photo/ue-tenders.webp'],
+  ['Nuggets', 'photo/ue-nuggets.webp'],
+  ['Bubble Bowl Nutella Bueno Banane', 'photo/ue-bubble-bowl-nutella-bueno-banane.webp'],
 ]
 
 // Short paraphrases of public Google reviews (not verbatim quotes).

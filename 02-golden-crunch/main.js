@@ -1,6 +1,6 @@
 import { gsap, ScrollTrigger, reduced, isPhone, smoothScroll, split, reveals, counters, magnetic, img } from '../shared/motion.js'
 import { fillInfo } from '../shared/render.js'
-import { favoris } from '../shared/info.js'
+import { favoris, surUber } from '../shared/info.js'
 import { formulas, sandwiches, ovnis, ovnisHiver, bubbleWaffle, desserts, glaces, boissonsChaudes, bubbleTea, boissonsFroides, euro } from '../shared/menu.js'
 
 const $ = (s, r = document) => r.querySelector(s)
@@ -100,7 +100,7 @@ update()
 
 /* ---------- carte panels ---------- */
 const P = []
-P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/crousty-bowl.webp', 'Bol crousty : poulet croustillant, sauce blanche et sauce barbecue')}${img('cut/poulet-bbq.webp', 'Sandwich poulet BBQ')}</div></div><div>
+P.push(`<article class="panel"><div class="art">${img('photo/ue-crousty-frites.webp', 'Crousty frites : frites maison, poulet crousty, sauce cheddar et sauce blanche', 'art-photo')}</div><div>
   <h3>La pause qui croustille</h3><p class="sub">Bowls &amp; sandwichs</p>
   <ul class="mlist">${sandwiches.bowls.map((b) => row(b.name, b.price, b.note)).join('')}${sandwiches.items.map((s) => row(s.name, 'dès 9,90 €', s.desc)).join('')}${row(sandwiches.kids.name, sandwiches.kids.price, sandwiches.kids.desc)}</ul>
   <h4>Kebab ou Poulet BBQ en formule</h4>${fbox(formulas.sandwich)}<p class="note">${formulas.dessertChoice}</p></div></article>`)
@@ -132,7 +132,7 @@ function deck() {
   box.innerHTML = favoris.map((f, i) => `
     <article class="dcard" data-i="${i}" aria-roledescription="carte" aria-label="${f.rank} : ${f.name}">
       <span class="dc-rank">${f.rank} le plus aimé</span>
-      <div class="dc-art${f.img.length > 1 ? ' duo' : ''}">${f.img.map((s) => img(s, '').replace('loading="lazy"', '')).join('')}</div>
+      <div class="dc-art photo"><img src="/img/${f.photo}" alt="${f.name}" width="960" height="640" decoding="async"></div>
       <h3 class="dc-name">${f.name}</h3>
       <p class="dc-text">${f.text}</p>
       <div class="dc-foot"><span class="dc-price">${f.price}<small>au kiosque</small></span><a class="dc-link" href="#carte">Voir la carte</a></div>
@@ -195,6 +195,7 @@ function deck() {
 deck()
 
 fillInfo()
+$('[data-ue]').innerHTML = surUber.map(([n, src]) => `<figure>${img(src, n)}<figcaption>${n}</figcaption></figure>`).join('')
 // reviews twice for a seamless loop
 $('[data-reviews]').innerHTML += $('[data-reviews]').innerHTML
 $('[data-reviews]').querySelectorAll('.quote').forEach((q, i) => i >= 4 && q.setAttribute('aria-hidden', 'true'))
@@ -235,7 +236,7 @@ if (!reduced) {
     gsap.timeline({ scrollTrigger: { trigger: '.carte', start: 'top top', end: () => '+=' + (track.scrollWidth - innerWidth), scrub: 0.6, pin: '.carte-pin', invalidateOnRefresh: true } })
       .to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none' }, 0)
       .to('.carte-progress span', { scaleX: 1, ease: 'none' }, 0)
-    gsap.utils.toArray('.panel .art img').forEach((im) => gsap.fromTo(im, { rotate: -8, scale: 0.85 }, { rotate: 4, scale: 1.05, ease: 'none',
+    gsap.utils.toArray('.panel .art img:not(.art-photo)').forEach((im) => gsap.fromTo(im, { rotate: -8, scale: 0.85 }, { rotate: 4, scale: 1.05, ease: 'none',
       scrollTrigger: { trigger: '.carte', start: 'top top', end: () => '+=' + (track.scrollWidth - innerWidth), scrub: true } }))
   })
   mm.add('(max-width: 900px)', () => {

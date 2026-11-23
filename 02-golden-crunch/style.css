@@ -58,7 +58,8 @@ em { font-style: italic; color: var(--caramel); }
 .hero-photo { position: absolute; inset: 0; z-index: -1; }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
 .hero::after { content: ''; position: absolute; inset: 0; z-index: -1; opacity: var(--shade, 1);
-  background: linear-gradient(180deg, rgba(20, 12, 8, .15) 0%, rgba(20, 12, 8, .1) 40%, rgba(20, 12, 8, .78) 100%), linear-gradient(90deg, rgba(20, 12, 8, .55), transparent 60%); }
+  /* lighter on top (KOS 23 Nov 2026: photo too dark); dark only behind the text at the bottom */
+  background: linear-gradient(180deg, rgba(20, 12, 8, 0) 0%, rgba(20, 12, 8, 0) 42%, rgba(20, 12, 8, .72) 100%), linear-gradient(90deg, rgba(20, 12, 8, .3), transparent 55%); }
 .hero-txt { position: relative; max-width: 640px; }
 .hero .display { color: #fff; }
 .hero .lead { color: rgba(255, 255, 255, .9); margin-bottom: 26px; }
@@ -426,4 +427,26 @@ address a { color: var(--caramel); font-weight: 700; }
   .brand .logo-script { height: 44px; }
   .badge-lieu { width: 96px; top: -34px; right: -4px; }
   .badge-foot { width: 130px; }
+}
+
+/* hero is brighter now: soft shadow keeps the white text readable */
+.hero .display, .hero .lead, .hero-rate { text-shadow: 0 2px 16px rgba(20, 12, 8, .55), 0 1px 3px rgba(20, 12, 8, .45); }
+
+/* ---------- owner's Uber Eats photos (23 Nov 2026) ---------- */
+.dc-art.photo { flex: 1; min-height: 0; margin: 14px 0 4px; }
+.dc-art.photo::before { display: none; }
+.dc-art.photo img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; border-radius: 20px; filter: none; box-shadow: 0 14px 24px -14px rgba(0, 0, 0, .6); }
+.panel .art .art-photo { position: relative; width: 100%; max-height: none; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 24px; filter: none; box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .7); }
+.ue { max-width: 1100px; margin: 34px auto 0; }
+.ue-h { margin: 0 0 14px; font: 800 26px/1 var(--serif); text-transform: uppercase; }
+.ue-row { display: grid; grid-template-columns: repeat(7, minmax(200px, 1fr)); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; scrollbar-width: none; }
+.ue-row::-webkit-scrollbar { display: none; }
+.ue-row figure { margin: 0; scroll-snap-align: start; }
+.ue-row img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 18px; }
+.ue-row figcaption { margin-top: 8px; font: 700 14px/1.25 var(--sans); }
+@media (max-width: 900px) {
+  .ue { margin: 26px -5vw 0; }
+  .ue-h { padding: 0 5vw; font-size: 22px; }
+  .ue-row { display: flex; padding: 0 5vw 10px; scroll-padding-inline: 5vw; }
+  .ue-row figure { flex: 0 0 62vw; }
 }

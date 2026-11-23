@@ -1,8 +1,0 @@
-# Live site = Demo 2 only, at the root. See tools/build-live.mjs.
-[build]
-  command = "npm run build:live"
-  publish = "dist-live"
-
-[build.environment]
-  # import.meta.dirname (vite.config.js, build-live.mjs) needs Node 20.11+
-  NODE_VERSION = "22"

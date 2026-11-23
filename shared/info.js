@@ -17,12 +17,24 @@ export const info = {
     ['Dimanche', 'Fermé'],
   ],
   services: ['Sur place', 'À emporter', 'Livraison'],
+  // Uber Eats store page, read 23 Nov 2026. Uber prices are higher than the kiosk: never show them here.
+  uberEats: 'https://www.ubereats.com/fr/store/waffle-truck/DHx6ysFpVGKnBqg_wTnE5w',
+  delivery: '12h – 21h45',
+  tickets: ['Ticket Restaurant', 'Swile', 'UpDéjeuner', 'Bimpli'],
   // given by KOS, 20 Nov 2026
   socials: [
     ['Instagram', 'https://www.instagram.com/waffletruck/'],
     ['Facebook', 'https://www.facebook.com/Waffletruck40'],
   ],
 }
+
+// "Les chouchous": the 3 most loved items on Uber Eats (23 Nov 2026), in that order.
+// Kiosk price only when the kiosk menu has it (menu.js); never the Uber price.
+export const favoris = [
+  { rank: 'N°1', name: 'Crousty Frites', text: 'Frites maison, poulet crousty, sauce cheddar et sauce blanche, oignons frits.', price: '9,90 €', img: ['cut/crousty-frites.webp'] },
+  { rank: 'N°2', name: 'Bubble Banane Nutella', text: 'La bubble waffle croustillante, Nutella et banane fraîche.', price: '5,70 €', img: ['cut/bubble-banane-cup.webp'] }, // 5,70 = base 3,50 + coulis Nutella 1 + fruits 1,20
+  { rank: 'N°3', name: 'Menu Kebab', text: 'Le kebab avec salade, tomates, oignons et sauce au choix. Frites maison et boisson.', price: '12,90 €', img: ['cut/kebab.webp', 'cut/frites-box.webp'] },
+]
 
 // Short paraphrases of public Google reviews (not verbatim quotes).
 export const reviews = [

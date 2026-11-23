@@ -301,3 +301,129 @@ address a { color: var(--caramel); font-weight: 700; }
 .foot .socials { justify-content: center; margin: 0 0 14px; }
 .foot .socials a { border-color: rgba(255, 246, 232, .3); }
 .foot .socials a:hover { color: var(--honey); border-color: var(--honey); }
+
+/* ---------- order: nav button, phone bar, livraison (23 Nov 2026) ---------- */
+.nav-cta { display: flex; gap: 10px; }
+.btn-uber { background: var(--berry); color: #fff; }
+.btn-uber:hover { background: var(--choco); }
+.order-bar { display: none; }
+.livraison { padding: clamp(60px, 8vw, 110px) 5vw; }
+.liv-card { position: relative; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 4vw; align-items: center; max-width: 1100px; margin: 0 auto;
+  padding: clamp(28px, 4vw, 56px); border-radius: 34px; background: var(--choco); color: var(--cream); overflow: hidden; }
+.liv-card::before { content: ''; position: absolute; inset: auto auto -30% -12%; width: 60%; aspect-ratio: 1; border-radius: 50%; background: rgba(242, 181, 68, .22); }
+.liv-art { position: relative; height: auto; width: min(100%, 360px); justify-self: center; rotate: -6deg; filter: drop-shadow(0 26px 26px rgba(90, 40, 10, .35)); }
+.liv-txt { position: relative; }
+.liv-txt .eyebrow { color: var(--honey); }
+.liv-txt .h2 { color: var(--honey); }
+.liv-txt .lead { color: rgba(255, 246, 232, .85); margin-bottom: 18px; }
+.liv-txt .lead b { color: var(--cream); white-space: nowrap; }
+.tickets-h { font: 700 14px/1 var(--sans); margin: 0 0 10px; }
+.tickets { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 24px; }
+.tickets li { padding: 7px 12px; border-radius: 99px; background: rgba(255, 246, 232, .12); font: 500 13px/1 var(--sans); }
+.liv-txt .small { color: rgba(255, 246, 232, .7); margin: 12px 0 0; }
+.deliv-line { display: flex; justify-content: space-between; gap: 12px; margin: -4px 0 14px; padding: 11px 14px; border-radius: 14px; background: var(--cream); }
+.deliv-line b { white-space: nowrap; }
+
+/* ---------- les chouchous : swipe deck ---------- */
+.chouchous { padding: clamp(70px, 9vw, 130px) 5vw; text-align: center; overflow: hidden; }
+.chou-head .h2 { margin-bottom: 26px; }
+.deck { position: relative; width: min(100%, 420px); height: 500px; margin: 0 auto 44px; }
+.dcard { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 24px 24px 22px; border-radius: 30px; text-align: left;
+  background: var(--choco); color: var(--cream); box-shadow: 0 30px 50px -30px rgba(58, 31, 18, .7); touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  transform-origin: 50% 90%; will-change: transform; }
+.dcard:nth-child(2) { background: var(--caramel); }
+.dcard:nth-child(3) { background: var(--honey); color: var(--choco); }
+.dcard.top { cursor: grab; }
+.dcard.top:active { cursor: grabbing; }
+.dc-rank { align-self: flex-start; padding: 7px 12px; border-radius: 99px; background: var(--cream); color: var(--choco); font: 700 13px/1 var(--sans); letter-spacing: .04em; }
+.dc-art { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; position: relative; }
+.dc-art::before { content: ''; position: absolute; width: 74%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 246, 232, .14); }
+.dcard:nth-child(3) .dc-art::before { background: rgba(255, 246, 232, .4); }
+.dc-art img { position: relative; max-height: 100%; max-width: 78%; width: auto; object-fit: contain; filter: drop-shadow(0 20px 22px rgba(0, 0, 0, .35)); pointer-events: none; }
+.dc-art.duo img { max-width: 66%; }
+.dc-art.duo img + img { max-width: 38%; margin-left: -16%; align-self: flex-end; }
+.dc-name { font: 800 clamp(34px, 9vw, 44px)/.95 var(--serif); text-transform: uppercase; margin: 6px 0 8px; }
+.dc-text { margin: 0 0 14px; font-size: 15px; line-height: 1.45; opacity: .85; }
+.dc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.dc-price { font: 800 26px/1 var(--serif); }
+.dc-price small { font: 500 13px/1 var(--sans); opacity: .8; margin-left: 6px; }
+.dc-link { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 99px; border: 1.5px solid currentColor; font: 700 14px/1 var(--sans); text-decoration: none; }
+.deck-ctrl { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 22px; }
+.deck-btn { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--line); background: #fff; color: var(--choco); display: grid; place-items: center; cursor: pointer; }
+.deck-btn:hover { border-color: var(--caramel); }
+.deck-btn svg, .order-bar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.deck-dots { display: flex; gap: 8px; }
+.deck-dots i { width: 9px; height: 9px; border-radius: 9px; background: var(--line); transition: width .3s, background .3s; }
+.deck-dots i.on { width: 26px; background: var(--caramel); }
+.deck-hint { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+/* reduced motion: a simple swipe list, no stack */
+.deck.list { height: auto; width: auto; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -5vw; padding: 0 5vw 10px; scrollbar-width: none; }
+.deck.list .dcard { position: relative; inset: auto; flex: 0 0 min(84vw, 380px); height: 480px; scroll-snap-align: center; }
+.deck.list ~ .deck-ctrl, .deck.list ~ .deck-hint { display: none; }
+
+@media (max-width: 900px) {
+  .nav-cta { display: none; }
+  .nav { justify-content: center; }
+  .order-bar { position: fixed; z-index: 60; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr auto auto; gap: 6px;
+    padding: 6px; border-radius: 22px; background: var(--choco); box-shadow: 0 16px 34px -12px rgba(30, 14, 6, .6); transform: translateY(140%); transition: transform .45s cubic-bezier(.2, .9, .3, 1.15); }
+  .order-bar.show { transform: none; }
+  .ob-main { display: flex; flex-direction: column; justify-content: center; gap: 3px; min-height: 52px; padding: 0 18px; border-radius: 16px; background: var(--berry); color: #fff; text-decoration: none; }
+  .ob-main b { font: 800 21px/1 var(--serif); text-transform: uppercase; letter-spacing: .02em; }
+  .ob-main small { font: 500 12px/1 var(--sans); opacity: .9; }
+  .ob-ico { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 62px; border-radius: 16px; color: var(--cream); text-decoration: none; font: 500 11px/1 var(--sans); }
+  .ob-ico:active { background: rgba(255, 246, 232, .1); }
+  .foot { padding-bottom: calc(60px + 82px + env(safe-area-inset-bottom)); }
+  .liv-card { grid-template-columns: 1fr; text-align: left; gap: 10px; border-radius: 28px; }
+  .liv-art { width: 46%; justify-self: end; margin: -10px -6px -34px 0; order: 2; }
+  .deck { height: 470px; }
+}
+
+/* ---------- ready-made ideas: kraft cups (23 Nov 2026) ---------- */
+.compose .stage { grid-row: span 2; }
+.idees { min-width: 0; }
+.idees-h { margin: 0 0 12px; font: 800 26px/1 var(--serif); text-transform: uppercase; }
+.idees-h span { font: 500 15px/1 var(--sans); text-transform: none; color: var(--muted); margin-left: 6px; }
+.idees-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.idee { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px 12px; border-radius: 22px; border: 1.5px solid var(--line);
+  background: #fff; color: var(--choco); cursor: pointer; font: inherit; transition: border-color .25s, transform .25s, box-shadow .25s, background .25s; }
+.idee img { height: 132px; width: auto; margin: -2px 0 4px; filter: drop-shadow(0 12px 12px rgba(90, 40, 10, .25)); transition: transform .35s cubic-bezier(.2, .9, .3, 1.4); }
+.idee:hover { border-color: var(--honey); }
+.idee:hover img { transform: translateY(-4px) rotate(-3deg); }
+.idee:active { transform: scale(.96); }
+.idee-name { font: 800 18px/1.05 var(--serif); text-transform: uppercase; text-align: center; }
+.idee-pr { font: 700 14px/1 var(--sans); color: var(--berry); }
+.idee[aria-pressed='true'] { background: var(--choco); color: var(--cream); border-color: var(--choco); box-shadow: 0 18px 30px -18px rgba(58, 31, 18, .8); }
+.idee[aria-pressed='true'] .idee-pr { color: var(--honey); }
+.idees-note { margin: 10px 0 22px; font-size: 13px; color: var(--muted); }
+.plate-waffle.cup { width: 52%; }
+
+@media (max-width: 900px) {
+  .compose .stage { grid-row: auto; }
+  .idees-h { font-size: 22px; }
+  .idees-h span { display: block; margin: 6px 0 0; font-size: 14px; }
+  .idees-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -5vw; padding: 4px 5vw 12px; scrollbar-width: none; }
+  .idees-row::-webkit-scrollbar { display: none; }
+  .idee { flex: 0 0 132px; scroll-snap-align: start; border-radius: 20px; }
+  .idee img { height: 118px; }
+  .idee-name { font-size: 16px; }
+  .idees-note { margin: 4px 0 6px; }
+  .plate-waffle.cup { width: 62%; }
+}
+
+/* ---------- hero title letters (23 Nov 2026) ---------- */
+.hero h1 .tw { display: inline-block; white-space: nowrap; }
+.hero h1 .tl { display: inline-block; will-change: transform; }
+
+/* ---------- brand marks from the kiosk sign (23 Nov 2026) ---------- */
+.brand .logo-script { height: 48px; width: auto; aspect-ratio: 230 / 64; color: var(--choco); display: block; }
+.logo-script, .badge { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.badge { display: block; width: 140px; height: 140px; }
+.badge-foot { width: 150px; height: 150px; margin: 0 auto 18px; }
+.lieu-txt { position: relative; }
+.badge-lieu { position: absolute; right: 0; top: -20px; width: clamp(110px, 12vw, 170px); height: auto; aspect-ratio: 1; rotate: 8deg;
+  filter: drop-shadow(0 14px 18px rgba(58, 31, 18, .25)); }
+@media (max-width: 900px) {
+  .brand .logo-script { height: 44px; }
+  .badge-lieu { width: 96px; top: -34px; right: -4px; }
+  .badge-foot { width: 130px; height: 130px; }
+}

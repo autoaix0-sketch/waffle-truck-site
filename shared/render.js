@@ -1,7 +1,8 @@
 import { info, reviews } from './info.js'
 import { formulas } from './menu.js'
 
-/** Fill every info hook: [data-maps] [data-tel] [data-address] [data-hours] [data-services] [data-reviews] [data-dessert] */
+/** Fill every info hook: [data-maps] [data-tel] [data-address] [data-hours] [data-services] [data-reviews] [data-dessert]
+ *  [data-uber] [data-delivery] [data-tickets] */
 export function fillInfo() {
   document.querySelectorAll('[data-maps]').forEach((a) => { a.href = info.maps })
   document.querySelectorAll('[data-tel]').forEach((a) => {
@@ -22,6 +23,11 @@ export function fillInfo() {
   document.querySelectorAll('[data-services]').forEach((el) => { el.textContent = info.services.join(' · ') })
   document.querySelectorAll('[data-socials]').forEach((el) => {
     el.innerHTML = (info.socials || []).map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')
+  })
+  document.querySelectorAll('[data-uber]').forEach((a) => { a.href = info.uberEats })
+  document.querySelectorAll('[data-delivery]').forEach((el) => { el.textContent = info.delivery })
+  document.querySelectorAll('[data-tickets]').forEach((el) => {
+    el.innerHTML = info.tickets.map((t) => `<li>${t}</li>`).join('')
   })
   document.querySelectorAll('[data-dessert]').forEach((el) => { el.textContent = formulas.dessertChoice })
   document.querySelectorAll('[data-reviews]').forEach((el) => {

@@ -55,6 +55,16 @@ export const bubbleWaffle = {
     { n: 6, title: 'La touche Chantilly', choices: ['Chantilly'], price: '+1,50 €', add: 1.5 },
   ],
   tagline: 'Ta waffle, tes envies.',
+  // Ready-made ideas shown with the kraft cups (23 Nov 2026). One value per step above
+  // (null = step skipped); the price is computed from the steps, so it is always the kiosk price.
+  idees: [
+    { name: 'Oreo', img: 'cut/cup-1.webp', pick: ['Nature', 'Chocolat', 'Vanille', 'Oreo', null, 'Chantilly'] },
+    { name: 'Fraise chantilly', img: 'cut/cup-2.webp', pick: ['Nature', 'Fraise', null, null, 'Fraise', 'Chantilly'] },
+    { name: 'Choco noisette', img: 'cut/cup-3.webp', pick: ['Nature', 'Chocolat', 'Chocolat', 'Éclats de noisette', null, 'Chantilly'] },
+    { name: 'Banane caramel', img: 'cut/cup-4.webp', pick: ['Nature', 'Caramel beurre salé', 'Vanille', null, 'Banane', 'Chantilly'] },
+    { name: 'Fruits rouges', img: 'cut/cup-5.webp', pick: ['Nature', 'Fraise', 'Fraise', null, 'Framboise', 'Chantilly'] },
+    { name: "M&M's", img: 'cut/cup-6.webp', pick: ['Nature', 'Chocolat', 'Vanille', "M&M's", null, 'Chantilly'] },
+  ],
 }
 
 export const desserts = {

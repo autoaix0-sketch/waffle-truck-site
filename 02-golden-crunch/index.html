@@ -9,18 +9,45 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23ff8a1f%22/%3E%3Cpath d=%22M4 11h24M4 21h24M11 4v24M21 4v24%22 stroke=%22%233a1f12%22 stroke-width=%223%22/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Kaushan+Script&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="/img/photo/terrasse.webp" media="(min-width: 901px)">
   <link rel="preload" as="image" href="/img/photo/kiosque-grand-mail.webp" media="(max-width: 900px)">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <!-- brand marks drawn from the kiosk sign (23 Nov 2026): #logo-script = header, #logo-badge = round sign -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo-script" viewBox="0 0 230 64">
+      <text x="115" y="38" text-anchor="middle" font-family="Kaushan Script, cursive" font-size="38" fill="currentColor" stroke="currentColor" stroke-width=".6">Waffle Truck</text>
+      <path d="M40 51h36M46 56h30M154 51h36M154 56h30" stroke="#c8691c" stroke-width="2.4" stroke-linecap="round"/>
+      <text x="115" y="58" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="11" letter-spacing="2.4" fill="currentColor">EST. 2019</text>
+    </symbol>
+    <symbol id="logo-badge" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="57" fill="#fff" stroke="#3a1f12" stroke-width="4"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#3a1f12" stroke-width="1.6"/>
+      <text x="60" y="58" text-anchor="middle" font-family="Kaushan Script, cursive" font-size="17" fill="#3a1f12" transform="rotate(-10 60 58)">Waffle Truck</text>
+      <text x="60" y="79" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="8" letter-spacing="1.4" fill="#3a1f12">EST. 2019</text>
+      <path d="M16 72h20M20 77h16M84 72h20M84 77h16" stroke="#3a1f12" stroke-width="1.6" stroke-linecap="round"/>
+      <g transform="translate(51 85)"><rect width="18" height="18" rx="4" fill="#3a1f12"/><path d="M6 2v14M12 2v14M2 6h14M2 12h14" stroke="#fff" stroke-width="1.6"/></g>
+    </symbol>
+  </svg>
   <a class="skip" href="#carte">Aller à la carte</a>
   <header class="nav">
-    <a href="#top" class="brand" aria-label="Waffle Truck, accueil"><img src="/img/logo.png" alt="Waffle Truck" width="207" height="92"></a>
-    <nav aria-label="Sections"><a href="#compose">Bubble waffle</a><a href="#carte">La carte</a><a href="#trompe">Nouveau</a><a href="#lieu">Le kiosque</a><a href="#infos">Horaires</a></nav>
-    <a class="btn btn-sm" data-maps target="_blank" rel="noopener" data-magnetic>Itinéraire</a>
+    <a href="#top" class="brand" aria-label="Waffle Truck, accueil"><svg class="logo-script" viewBox="0 0 230 64" aria-hidden="true"><use href="#logo-script"/></svg></a>
+    <nav aria-label="Sections"><a href="#compose">Bubble waffle</a><a href="#chouchous">Chouchous</a><a href="#carte">La carte</a><a href="#trompe">Nouveau</a><a href="#livraison">Livraison</a><a href="#infos">Horaires</a></nav>
+    <div class="nav-cta">
+      <a class="btn btn-sm btn-uber nav-order" data-uber target="_blank" rel="noopener" data-magnetic>Commander</a>
+    </div>
   </header>
+
+  <!-- phone only: order / directions / call, fixed at the bottom (23 Nov 2026) -->
+  <nav class="order-bar" aria-label="Commander ou venir au kiosque">
+    <a class="ob-main" data-uber target="_blank" rel="noopener"><b>Commander</b><small>Livraison Uber Eats</small></a>
+    <a class="ob-ico" data-maps target="_blank" rel="noopener" aria-label="Itinéraire vers le kiosque">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg><span>Y aller</span></a>
+    <a class="ob-ico" data-tel>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11.5 11.5 0 0 0 5.2 5.2l1.4-2.1 4.2 1.6V17a2.5 2.5 0 0 1-2.7 2.5C9.6 19 5 14.4 4.5 6.2A2.5 2.5 0 0 1 5 3.5z"/></svg><span>Appeler</span></a>
+  </nav>
 
   <main id="top">
     <section class="hero" aria-labelledby="h1">
@@ -63,7 +90,28 @@
           <p class="recap" data-recap>Base nature</p>
         </div>
       </div>
+      <!-- ready-made ideas: the kraft cups (23 Nov 2026). Tap = the steps below are filled in -->
+      <div class="idees" aria-labelledby="idees-h">
+        <p id="idees-h" class="idees-h">Pas d’idée ? <span>Touche un gobelet</span></p>
+        <div class="idees-row" data-idees role="group" aria-label="Recettes toutes prêtes"></div>
+        <p class="idees-note">Photos d’illustration. Prix du kiosque.</p>
+      </div>
       <ol class="build-steps" data-build></ol>
+    </section>
+
+    <!-- CHOUCHOUS : the 3 most loved items on Uber Eats, swipe cards (23 Nov 2026) -->
+    <section id="chouchous" class="chouchous" aria-labelledby="chou-h">
+      <div class="chou-head">
+        <p class="eyebrow">Les plus aimés sur Uber Eats</p>
+        <h2 id="chou-h" class="h2">Les chouchous</h2>
+      </div>
+      <div class="deck" data-deck aria-roledescription="carrousel" aria-label="Les 3 plats les plus aimés"></div>
+      <div class="deck-ctrl">
+        <button type="button" class="deck-btn" data-deck-prev aria-label="Plat précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <span class="deck-dots" data-deck-dots></span>
+        <button type="button" class="deck-btn" data-deck-next aria-label="Plat suivant"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <p class="deck-hint">Glisse la carte pour voir la suivante</p>
     </section>
 
     <!-- CARTE : horizontal panels -->
@@ -113,6 +161,7 @@
     <!-- LIEU -->
     <section id="lieu" class="lieu" aria-labelledby="lieu-h">
       <div class="lieu-txt">
+        <svg class="badge badge-lieu" viewBox="0 0 120 120" role="img" aria-label="Logo Waffle Truck, est. 2019"><use href="#logo-badge"/></svg>
         <h2 id="lieu-h" class="h2">Le kiosque</h2>
         <p class="lead">Un kiosque en bois au Grand Mail, avec une terrasse, des tables et des parasols. Vous mangez sur place, vous emportez, ou on vous livre.</p>
       </div>
@@ -136,6 +185,22 @@
       <div class="avis-track" data-reviews></div>
     </section>
 
+    <!-- LIVRAISON : Uber Eats link only, no Uber prices (KOS, 23 Nov 2026) -->
+    <section id="livraison" class="livraison" aria-labelledby="liv-h">
+      <div class="liv-card">
+        <img src="/img/cut/frites-box.webp" alt="" class="liv-art" loading="lazy" width="492" height="510">
+        <div class="liv-txt">
+          <p class="eyebrow">Livraison</p>
+          <h2 id="liv-h" class="h2">Livré chez toi</h2>
+          <p class="lead">On te livre avec Uber Eats, de <b data-delivery>12h – 21h45</b>. Même après la fermeture du kiosque.</p>
+          <p class="tickets-h">Tickets resto acceptés</p>
+          <ul class="tickets" data-tickets></ul>
+          <a class="btn btn-uber" data-uber target="_blank" rel="noopener" data-magnetic>Commander sur Uber Eats</a>
+          <p class="small">Les prix en livraison sont ceux de l’appli.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- INFOS -->
     <section id="infos" class="infos" aria-labelledby="infos-h">
       <div>
@@ -150,13 +215,14 @@
       <div class="hours-card">
         <h3>Horaires</h3>
         <table class="hours" data-hours></table>
+        <p class="deliv-line"><span>Livraison</span><b data-delivery>12h – 21h45</b></p>
         <p class="small" data-services></p>
       </div>
     </section>
   </main>
 
   <footer class="foot">
-    <p class="brand">Waffle Truck</p>
+    <svg class="badge badge-foot" viewBox="0 0 120 120" role="img" aria-label="Waffle Truck, est. 2019"><use href="#logo-badge"/></svg>
     <p class="socials" data-socials></p>
     <p>Good food. Good mood. · Des produits de qualité · Depuis 2019</p>
     <p class="small">Site de démonstration</p>

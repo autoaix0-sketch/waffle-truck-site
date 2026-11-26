@@ -1,13 +1,15 @@
 import { gsap, ScrollTrigger, reduced, isPhone, smoothScroll, split, reveals, counters, magnetic, img } from '../shared/motion.js'
 import { fillInfo } from '../shared/render.js'
-import { favoris, surUber } from '../shared/info.js'
-import { formulas, sandwiches, ovnis, ovnisHiver, bubbleWaffle, desserts, glaces, boissonsChaudes, bubbleTea, boissonsFroides, euro } from '../shared/menu.js'
+import { info, favoris, surUber } from '../shared/info.js'
+import { formulas, sandwiches, ovnis, ovnisHiver, bubbleWaffle, desserts, glaces, boissonsChaudes, bubbleTea, boissonsFroides } from '../shared/menu.js'
 
 const $ = (s, r = document) => r.querySelector(s)
 const $$ = (s, r = document) => [...r.querySelectorAll(s)]
-const row = (name, price, sub = '', best = '') =>
-  `<li><span>${name}${best ? `<span class="best">${best}</span>` : ''}${sub ? `<small>${sub}</small>` : ''}</span><span class="dots"></span><span class="pr">${price}</span></li>`
-const fbox = (list) => `<div class="fbox">${list.map((f) => `<div class="${f.star ? 'star' : ''}">${f.name}<b>${f.price}</b>${f.detail}</div>`).join('')}</div>`
+// No prices on this site (KOS, 26 Nov 2026): orders go through Uber Eats. Prices stay in shared/menu.js for the TVs.
+const row = (name, sub = '', best = '') =>
+  `<li><span>${name}${best ? `<span class="best">${best}</span>` : ''}${sub ? `<small>${sub}</small>` : ''}</span></li>`
+const fbox = (list) => `<div class="fbox">${list.map((f) => `<div class="${f.star ? 'star' : ''}"><b>${f.name}</b>${f.detail}</div>`).join('')}</div>`
+const order = (txt = 'Commander sur Uber Eats') => `<a class="panel-order btn btn-uber btn-sm" data-uber target="_blank" rel="noopener">${txt}</a>`
 
 /* ---------- open / closed (Paris time) ---------- */
 function status() {
@@ -24,106 +26,153 @@ function status() {
 }
 status(); setInterval(status, 60000)
 
-/* ---------- builder ---------- */
+/* ---------- nos bubble cups: swipe coverflow (26 Nov 2026) ----------
+   The 6 kraft cups, no prices. Drag / swipe / arrows / dots / keys. The active cup is big and upright,
+   the others tilt back. A toppings cloud floats around the active cup. Reduced motion: a plain swipe list. */
 const steps = bubbleWaffle.steps
-const sel = steps.map((s, i) => (i === 0 ? s.choices[0] : null))
-const touched = steps.map(() => false)
-$('[data-build]').innerHTML = steps.map((s, i) => `
-  <li class="bstep" data-i="${i}">
-    <header><span class="num">${s.n}</span><h3>${s.title}</h3><span class="add">${s.price}</span></header>
-    <div class="chips" role="group" aria-label="${s.title}">
-      ${s.choices.map((c) => `<button type="button" class="chip" aria-pressed="${sel[i] === c}" data-c="${c}">${c}</button>`).join('')}
-    </div>
-    ${i > 0 ? '<p class="skip-note">Optionnel · touche encore pour retirer</p>' : ''}
-  </li>`).join('')
+function cups() {
+  const stage = $('[data-cups-stage]'), track = $('[data-cups]'), dotsBox = $('[data-cups-dots]'), chipsBox = $('[data-cups-chips]')
+  const nameEl = $('[data-cups-name]'), recEl = $('[data-cups-recipe]')
+  const list = bubbleWaffle.idees, n = list.length
+  const lbl = ['Base', 'Coulis', 'Glace', '', 'Fruits', '']
+  // "Base nature", "Coulis chocolat", "Glace vanille", "Oreo", "Banane", "Chantilly" (no price, ever)
+  const parts = (d) => d.pick.map((c, i) => (c ? (lbl[i] ? `${lbl[i]} ${c.toLowerCase()}` : c) : null)).filter(Boolean)
 
-const sumEl = $('[data-sum]'), recapEl = $('[data-recap]'), tops = $('.toppings')
-const tokColors = ['#3a1f12', '#e8445a', '#f2b544', '#3ee0a1', '#ffffff', '#c8691c']
-const spots = [[8, 12], [62, 6], [70, 62], [4, 60], [36, 0], [40, 78]]
-let shown = 3.5
-function total() { return steps.reduce((t, s, i) => t + (sel[i] ? s.add : 0), 0) }
-function update(changed) {
-  const t = total(), o = { v: shown }
-  gsap.to(o, { v: t, duration: reduced ? 0 : 0.6, ease: 'power2.out', onUpdate: () => (sumEl.textContent = euro(o.v)) })
-  shown = t
-  const words = ['Base', 'coulis', 'glace', 'topping', 'fruits', 'chantilly']
-  recapEl.textContent = sel.map((c, i) => (c ? (i === 5 ? 'chantilly' : `${words[i]} ${c.toLowerCase()}`) : null)).filter(Boolean).join(' · ')
-  document.querySelectorAll('.bstep').forEach((li, i) => li.querySelectorAll('.chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.c === sel[i]))))
-  if (changed == null || changed === 0) return
-  const old = tops.querySelector(`[data-s="${changed}"]`)
-  if (old) old.remove()
-  if (!sel[changed]) return
-  const [lx, ly] = spots[changed]
-  const isScoop = changed === 2
-  const map = { Vanille: 'vanille', Chocolat: 'chocolat', Fraise: 'fraise', Pistache: 'pistache', Café: 'cafe', Caramel: 'caramel', Coco: 'coco' }
-  const html = isScoop
-    ? `<span class="tok pic" data-s="${changed}" style="left:${lx}%;top:${ly}%">${img(`cut/boule-${map[sel[changed]]}.webp`, '')}</span>`
-    : `<span class="tok" data-s="${changed}" style="left:${lx}%;top:${ly}%;background:${tokColors[changed]};color:${changed === 0 || changed === 1 ? '#fff6e8' : '#3a1f12'}">${sel[changed]}</span>`
-  tops.insertAdjacentHTML('beforeend', html)
-  if (!reduced) gsap.from(tops.lastElementChild, { y: -120, rotate: -25, scale: 0.4, opacity: 0, duration: 0.9, ease: 'bounce.out' })
-  if (!reduced) gsap.fromTo('.plate-waffle', { scale: 0.94 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,.4)' })
-}
-/* ready-made ideas (kraft cups): tap = fill every step, the plate shows that cup */
-const plateImg = $('.plate-waffle'), plateSrc = plateImg.getAttribute('src'), plateAlt = plateImg.alt
-const ideas = bubbleWaffle.idees
-const ideaPrice = (pick) => euro(pick.reduce((t, c, i) => t + (c ? steps[i].add : 0), 0))
-$('[data-idees]').innerHTML = ideas.map((d, k) => `
-  <button type="button" class="idee" data-k="${k}" aria-pressed="false">
-    ${img(d.img, '')}<span class="idee-name">${d.name}</span><span class="idee-pr">${ideaPrice(d.pick)}</span>
-  </button>`).join('')
-function showPlate(k) {
-  const d = ideas[k]
-  plateImg.src = d ? `/img/${d.img}` : plateSrc
-  plateImg.alt = d ? `Bubble waffle ${d.name}` : plateAlt
-  plateImg.classList.toggle('cup', !!d)
-  document.querySelectorAll('.idee').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.k === k)))
-}
-$('[data-idees]').addEventListener('click', (e) => {
-  const b = e.target.closest('.idee')
-  if (!b) return
-  const d = ideas[+b.dataset.k]
-  d.pick.forEach((c, i) => { touched[i] = true; sel[i] = c; update(i) })
-  showPlate(+b.dataset.k)
-  if (!reduced) gsap.fromTo(plateImg, { y: -30, scale: 0.8, rotate: -8 }, { y: 0, scale: 1, rotate: 0, duration: 0.7, ease: 'back.out(2)' })
-})
+  track.innerHTML = list.map((d, i) => `
+    <figure class="cup" data-i="${i}">${img(d.img, `Bubble waffle ${d.name}`, 'cup-img', true)}
+      <figcaption><b>${d.name}</b><span>${parts(d).join(' · ')}</span></figcaption></figure>`).join('')
+  const figs = [...track.children]
 
-document.querySelectorAll('.bstep').forEach((li) => li.addEventListener('click', (e) => {
-  const b = e.target.closest('.chip')
-  if (!b) return
-  const i = +li.dataset.i
-  touched[i] = true
-  sel[i] = sel[i] === b.dataset.c && i > 0 ? null : b.dataset.c
-  showPlate(-1)   // own recipe now: back to the plain waffle
-  update(i)
-}))
-update()
+  if (reduced) {
+    stage.classList.add('list')
+    $('.cups-info').hidden = true
+    $('.cups-info').nextElementSibling.hidden = true
+    return
+  }
+
+  dotsBox.innerHTML = list.map((d) => `<button type="button" class="dot-b" aria-label="${d.name}"><i></i></button>`).join('')
+  const dots = [...dotsBox.children]
+  const mod = (k) => ((k % n) + n) % n
+  const S = { pos: 0 }
+  let active = -1, sp = 240, touchedByUser = false, moved = false, nudge = null
+  // any user action cancels the first-view swipe hint, so it can never fight with the user
+  const userTouch = () => { touchedByUser = true; if (nudge) { nudge.kill(); nudge = null } }
+
+  const measure = () => { sp = Math.max(120, Math.min(300, stage.clientWidth * (innerWidth <= 900 ? 0.5 : 0.26))) }
+  function render(p = S.pos) {
+    figs.forEach((f, i) => {
+      let off = i - p
+      off = ((off + n / 2) % n + n) % n - n / 2           // shortest way round the loop
+      const a = Math.abs(off)
+      gsap.set(f, {
+        xPercent: -50, yPercent: -50, x: off * sp, z: -a * 150, scale: 1 - Math.min(a, 2.2) * 0.2, rotateY: Math.max(-65, Math.min(65, -off * 38)),
+        opacity: Math.max(0, Math.min(1, 1.3 - a * 0.48)), zIndex: Math.round(100 - a * 10), filter: `brightness(${(1 - Math.min(a, 2) * 0.12).toFixed(2)})`,
+      })
+    })
+    const k = mod(Math.round(p))
+    if (k !== active) setActive(k)
+  }
+
+  function setActive(k) {
+    active = k
+    const d = list[k]
+    figs.forEach((f, i) => { f.setAttribute('aria-hidden', String(i !== k)); f.classList.toggle('on', i === k) })
+    dots.forEach((b, i) => b.classList.toggle('on', i === k))
+    nameEl.textContent = d.name
+    recEl.textContent = parts(d).join(' · ')
+    gsap.fromTo([nameEl, recEl], { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out', overwrite: true })
+    // topping cloud: one bubble per ingredient, popping around the cup
+    gsap.killTweensOf(chipsBox.children)
+    chipsBox.innerHTML = parts(d).slice(1).map((t) => `<span class="cchip">${t}</span>`).join('')
+    const cs = [...chipsBox.children]
+    gsap.from(cs, { scale: 0, y: 30, rotate: () => gsap.utils.random(-25, 25), opacity: 0, duration: 0.7, stagger: 0.07, ease: 'back.out(2.2)', delay: 0.1 })
+    cs.forEach((c, i) => gsap.to(c, { y: i % 2 ? -8 : 8, duration: 2 + i * 0.3, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: 0.9 }))
+    gsap.fromTo(figs[k].querySelector('img'), { rotate: -6 }, { rotate: 0, duration: 0.8, ease: 'elastic.out(1,.45)' })
+  }
+
+  function snap(target, dur = 0.7) {
+    gsap.to(S, { pos: target, duration: dur, ease: 'power3.out', overwrite: true, onUpdate: () => render() })
+  }
+  // shortest way from the cup in front to cup i
+  const toward = (i) => { const k = mod(Math.round(S.pos)); let d = i - k; if (d > n / 2) d -= n; if (d < -n / 2) d += n; return Math.round(S.pos) + d }
+  const go = (dir) => { userTouch(); snap(Math.round(S.pos) + dir) }
+  $('[data-cups-next]').addEventListener('click', () => go(1))
+  $('[data-cups-prev]').addEventListener('click', () => go(-1))
+  dots.forEach((b, i) => b.addEventListener('click', () => { userTouch(); snap(toward(i)) }))
+  figs.forEach((f, i) => f.addEventListener('click', () => { if (moved) return; userTouch(); snap(toward(i)) }))
+  stage.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1) }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1) }
+  })
+
+  // drag: the cups follow the finger, then settle on the nearest one (a flick goes one further)
+  let sx = 0, sy = 0, p0 = 0, drag = false, lastX = 0, lastT = 0, vel = 0, axis = ''
+  stage.addEventListener('pointerdown', (e) => {
+    if (e.button > 0) return
+    userTouch(); drag = true; moved = false; axis = ''; sx = lastX = e.clientX; sy = e.clientY; p0 = S.pos; vel = 0; lastT = performance.now()
+    gsap.killTweensOf(S)
+  })
+  stage.addEventListener('pointermove', (e) => {
+    if (!drag) return
+    const dx = e.clientX - sx, dy = e.clientY - sy
+    if (!axis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y'
+    if (axis === 'y') { drag = false; snap(Math.round(S.pos)); return }   // the page scrolls: let go
+    if (axis !== 'x') return
+    if (!moved) { moved = true; stage.setPointerCapture(e.pointerId) }
+    const now = performance.now()
+    vel = (e.clientX - lastX) / Math.max(1, now - lastT); lastX = e.clientX; lastT = now
+    S.pos = p0 - dx / sp
+    render()
+  })
+  const end = () => {
+    if (!drag) return
+    drag = false
+    if (!moved) return
+    const flick = Math.abs(vel) > 0.5 ? -Math.sign(vel) * 0.5 : 0
+    snap(Math.round(S.pos + flick))
+    setTimeout(() => (moved = false), 50)
+  }
+  stage.addEventListener('pointerup', end)
+  stage.addEventListener('pointercancel', end)
+
+  // a small nudge the first time the cups come into view, so people see they can swipe
+  ScrollTrigger.create({ trigger: stage, start: 'top 70%', once: true, onEnter: () => {
+    if (touchedByUser) return
+    nudge = gsap.timeline({ onComplete: () => (nudge = null) }).to(S, { pos: 0.3, duration: 0.55, ease: 'power2.inOut', onUpdate: () => render() })
+      .to(S, { pos: 0, duration: 0.8, ease: 'elastic.out(1,.5)', onUpdate: () => render() })
+  } })
+
+  measure(); render(0)
+  addEventListener('resize', () => { measure(); render() })
+}
+cups()
 
 /* ---------- carte panels ---------- */
 const P = []
 P.push(`<article class="panel"><div class="art">${img('photo/ue-crousty-frites.webp', 'Crousty frites : frites maison, poulet crousty, sauce cheddar et sauce blanche', 'art-photo')}</div><div>
   <h3>La pause qui croustille</h3><p class="sub">Bowls &amp; sandwichs</p>
-  <ul class="mlist">${sandwiches.bowls.map((b) => row(b.name, b.price, b.note)).join('')}${sandwiches.items.map((s) => row(s.name, 'dès 9,90 €', s.desc)).join('')}${row(sandwiches.kids.name, sandwiches.kids.price, sandwiches.kids.desc)}</ul>
-  <h4>Kebab ou Poulet BBQ en formule</h4>${fbox(formulas.sandwich)}<p class="note">${formulas.dessertChoice}</p></div></article>`)
+  <ul class="mlist">${sandwiches.bowls.map((b) => row(b.name, b.note)).join('')}${sandwiches.items.map((s) => row(s.name, s.desc)).join('')}${row(sandwiches.kids.name, sandwiches.kids.desc)}</ul>
+  <h4>Kebab ou Poulet BBQ en formule</h4>${fbox(formulas.sandwich)}<p class="note">${formulas.dessertChoice}</p>${order()}</div></article>`)
 P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/area-51.webp', 'OVNI Area 51')}${img('cut/comete.webp', 'OVNI Comète')}</div></div><div>
   <h3>Les OVNI</h3><p class="sub">Les burgers venus d'ailleurs · pain pressé</p>
-  <ul class="mlist">${ovnis.map((o) => row(o.name, 'dès 9,90 €', o.desc)).join('')}</ul>${fbox(formulas.ovni)}
-  <h4>OVNI d'hiver</h4><ul class="mlist">${ovnisHiver.items.map((o) => row(o.name, '', o.desc)).join('')}${row('Menu Complet', ovnisHiver.menuComplet.price, ovnisHiver.menuComplet.detail)}${row('Area Express', ovnisHiver.areaExpress.price, ovnisHiver.areaExpress.detail)}</ul></div></article>`)
+  <ul class="mlist">${ovnis.map((o) => row(o.name, o.desc)).join('')}</ul>${fbox(formulas.ovni)}
+  <h4>OVNI d'hiver</h4><ul class="mlist">${ovnisHiver.items.map((o) => row(o.name, o.desc)).join('')}${row('Menu Complet', ovnisHiver.menuComplet.detail)}${row('Area Express', ovnisHiver.areaExpress.detail)}</ul>${order()}</div></article>`)
 P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/churros.webp', 'Churros')}${img('cut/crepe-nutella.webp', 'Crêpe Nutella')}</div></div><div>
   <h3>La pause ultra gourmande</h3><p class="sub">Waffles, churros, crêpes et beignets</p>
-  <ul class="mlist">${row('Bubble Waffle', '3,50 €', 'Base nature, chocolat ou matcha, à composer')}${desserts.churros.map((c) => row(c.name, c.price)).join('')}${desserts.crepes.map((c) => row(c.name, c.price)).join('')}${row('Beignet', desserts.beignets.price, desserts.beignets.flavours.join(' · '))}${row('La Pause Café', desserts.pauseCafe.price, desserts.pauseCafe.detail)}</ul>
-  <p class="note">${desserts.crepeExtras}</p></div></article>`)
+  <ul class="mlist">${row('Bubble Waffle', 'Base nature, chocolat ou matcha, à composer')}${desserts.churros.map((c) => row(c.name)).join('')}${desserts.crepes.map((c) => row(c.name)).join('')}${row('Beignet', desserts.beignets.flavours.join(' · '))}${row('La Pause Café', desserts.pauseCafe.detail)}</ul>
+  <p class="note">Suppléments au choix : Chantilly, Bueno, Banane</p>${order()}</div></article>`)
 P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/dame-blanche.webp', 'Dame blanche')}${img('cut/fraise-melba.webp', 'Fraise Melba')}</div></div><div>
   <h3>Glaces</h3><p class="sub">${glaces.parfums.join(' · ')}</p>
-  <ul class="mlist">${glaces.formats.map((f) => row(f.name, f.price)).join('')}</ul>
-  <h4>Coupes les plus vendues</h4><ul class="mlist cols">${glaces.coupes.map((c) => row(c.name, c.price, c.desc)).join('')}</ul><p class="note">${glaces.note}</p></div></article>`)
+  <ul class="mlist">${row('Boules de glace', '1, 2 ou 3 boules, les parfums de ton choix')}</ul>
+  <h4>Coupes les plus vendues</h4><ul class="mlist cols">${glaces.coupes.map((c) => row(c.name, c.desc)).join('')}</ul><p class="note">${glaces.note}</p>${order()}</div></article>`)
 P.push(`<article class="panel"><div class="art">${img('cut/pause-cafe.webp', 'Café et crêpe')}</div><div>
   <h3>Cafés &amp; chocolats</h3><p class="sub">Pour la pause café, sur place ou à emporter</p>
-  <ul class="mlist cols">${boissonsChaudes.cafes.map(([a, b, t]) => row(a, b, '', t)).join('')}</ul>
-  <h4>Chocolats chauds</h4><ul class="mlist">${boissonsChaudes.chocolats.map(([a, b, t]) => row(a, b, '', t)).join('')}</ul></div></article>`)
+  <ul class="mlist cols">${boissonsChaudes.cafes.map(([a, , t]) => row(a, '', t)).join('')}</ul>
+  <h4>Chocolats chauds</h4><ul class="mlist">${boissonsChaudes.chocolats.map(([a, , t]) => row(a, '', t)).join('')}</ul>${order()}</div></article>`)
 P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/bt-mangue.webp', 'Bubble tea mangue')}${img('cut/bt-fruits-rouges.webp', 'Bubble tea fruits rouges')}</div></div><div>
   <h3>Bubble tea &amp; boissons fraîches</h3><p class="sub">Base fruitée ou lactée · ${bubbleTea.sirops.length} sirops · perles fruitées ou tapioca</p>
-  <ul class="mlist">${bubbleTea.formats.map((f) => row(`Bubble tea ${f.name.toLowerCase()} ${f.size}`, f.price)).join('')}
-  ${boissonsFroides.map((d) => row(d.name, d.prices.map((p) => p[1]).join(' / '), `${d.items}${d.prices.length > 1 ? ' · 35 cl / 75 cl' : ''}`)).join('')}</ul></div></article>`)
+  <ul class="mlist">${row('Bubble tea', bubbleTea.formats.map((f) => `${f.name} ${f.size}`).join(' · '))}
+  ${boissonsFroides.map((d) => row(d.name, `${d.items}${d.prices.length > 1 ? ' · 35 cl / 75 cl' : ''}`)).join('')}</ul>${order()}</div></article>`)
 $('[data-panels]').innerHTML = P.join('')
 
 /* ---------- les chouchous : swipe deck ---------- */
@@ -135,7 +184,7 @@ function deck() {
       <div class="dc-art photo"><img src="/img/${f.photo}" alt="${f.name}" width="960" height="640" decoding="async"></div>
       <h3 class="dc-name">${f.name}</h3>
       <p class="dc-text">${f.text}</p>
-      <div class="dc-foot"><span class="dc-price">${f.price}<small>au kiosque</small></span><a class="dc-link" href="#carte">Voir la carte</a></div>
+      <div class="dc-foot"><a class="dc-order" href="${info.uberEats}" target="_blank" rel="noopener">Commander</a><a class="dc-link" href="#carte">Voir la carte</a></div>
     </article>`).join('')
   const cards = [...box.children]
   if (reduced) { box.classList.add('list'); return }
@@ -216,14 +265,6 @@ ScrollTrigger.create({ start: 40, onToggle: (st) => nav.classList.toggle('solid'
 // phone order bar: slides up once the hero (and its scroll camera) is behind us
 const bar = $('.order-bar')
 ScrollTrigger.create({ trigger: '#compose', start: 'top 85%', onToggle: (st) => bar.classList.toggle('show', st.isActive || st.progress > 0), end: 'max' })
-
-// steps light up when they reach the middle of the screen; untouched steps get a default
-document.querySelectorAll('.bstep').forEach((li, i) => ScrollTrigger.create({
-  trigger: li, start: 'top 62%', end: 'bottom 38%',
-  onToggle: (st) => li.classList.toggle('on', st.isActive),
-  onEnter: () => { if (!touched[i] && !sel[i]) { sel[i] = steps[i].choices[0]; update(i) } },
-  onLeaveBack: () => { if (!touched[i] && i > 0) { sel[i] = null; update(i) } },
-}))
 
 if (!reduced) {
   gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -307,7 +348,7 @@ function heroCamera(titleFrame) {
   const SIGNS = { terrasse: [655, 276, 53], 'kiosque-grand-mail': [455.5, 359.5, 60] }
   const hero = $('.hero'), photo = $('.hero-photo img'), portal = $('.portal'), hint = $('.scroll-hint')
   const txt = $$('.hero-txt > :not(h1)'), waffle = $('.portal-waffle'), line = $('.portal-line'), tagsBox = $('.portal-tags')
-  tagsBox.innerHTML = steps.map((st, i) => `<span class="ptag">${i === 0 ? 'Base' : ['Coulis', 'Glace', 'Topping', 'Fruits frais', 'Chantilly'][i - 1]} <b>${st.price}</b></span>`).join('')
+  tagsBox.innerHTML = steps.map((st, i) => `<span class="ptag">${['Base', 'Coulis', 'Glace', 'Topping', 'Fruits frais', 'La touche'][i]} <b>${st.choices.slice(0, 2).join(' · ')}</b></span>`).join('')
   const tags = [...tagsBox.children]
   const clamp = gsap.utils.clamp(0, 1), inE = gsap.parseEase('power2.in'), ioE = gsap.parseEase('power2.inOut'), outE = gsap.parseEase('power3.out')
   const seg = (p, a, b) => clamp((p - a) / (b - a))

@@ -68,27 +68,29 @@
       <p class="scroll-hint" aria-hidden="true"><span></span>Descends pour entrer</p>
     </section>
 
-    <!-- BUILDER -->
-    <section id="compose" class="compose" aria-labelledby="compose-h">
-      <div class="stage">
-        <div class="stage-inner">
-          <h2 id="compose-h" class="h2">Compose ton plaisir&nbsp;!</h2>
-          <p class="intro">La base est à 3,50 €. Ensuite, tu ajoutes ce que tu veux. Ta waffle, tes envies.</p>
-          <div class="plate">
-            <img src="/img/cut/bubble-waffle.webp" alt="Ta bubble waffle" class="plate-waffle" loading="lazy">
-            <div class="toppings" aria-hidden="true"></div>
-          </div>
-          <p class="sum"><span>Ta waffle</span><strong data-sum aria-live="polite">3,50 €</strong></p>
-          <p class="recap" data-recap>Base nature</p>
-        </div>
+    <!-- NOS BUBBLE CUPS : swipe showcase of the 6 kraft cups (26 Nov 2026, no prices: orders go to Uber Eats) -->
+    <section id="compose" class="compose cups" aria-labelledby="compose-h">
+      <div class="cups-head">
+        <p class="eyebrow">Bubble waffle</p>
+        <h2 id="compose-h" class="h2">Compose ton plaisir&nbsp;!</h2>
+        <p class="intro">Ta waffle, tes envies. Glisse pour découvrir nos gobelets.</p>
       </div>
-      <!-- ready-made ideas: the kraft cups (23 Nov 2026). Tap = the steps below are filled in -->
-      <div class="idees" aria-labelledby="idees-h">
-        <p id="idees-h" class="idees-h">Pas d’idée ? <span>Touche un gobelet</span></p>
-        <div class="idees-row" data-idees role="group" aria-label="Recettes toutes prêtes"></div>
-        <p class="idees-note">Photos d’illustration. Prix du kiosque.</p>
+      <div class="cups-stage" data-cups-stage role="region" aria-roledescription="carrousel" aria-label="Nos bubble waffles" tabindex="0">
+        <div class="cups-glow" aria-hidden="true"></div>
+        <div class="cups-chips" data-cups-chips aria-hidden="true"></div>
+        <div class="cups-track" data-cups></div>
       </div>
-      <ol class="build-steps" data-build></ol>
+      <div class="cups-info" aria-live="polite">
+        <h3 class="cups-name" data-cups-name></h3>
+        <p class="cups-recipe" data-cups-recipe></p>
+      </div>
+      <div class="deck-ctrl">
+        <button type="button" class="deck-btn" data-cups-prev aria-label="Gobelet précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <span class="deck-dots" data-cups-dots></span>
+        <button type="button" class="deck-btn" data-cups-next aria-label="Gobelet suivant"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <a class="btn btn-uber cups-cta" data-uber target="_blank" rel="noopener" data-magnetic>Commander sur Uber Eats</a>
+      <p class="idees-note">Photos d’illustration. Les garnitures peuvent varier.</p>
     </section>
 
     <!-- CHOUCHOUS : the 3 most loved items on Uber Eats, swipe cards (23 Nov 2026) -->
@@ -111,7 +113,7 @@
       <div class="carte-pin">
         <header class="carte-head">
           <h2 id="carte-h" class="h2">La carte</h2>
-          <p class="carte-sub">Les mêmes prix qu'au kiosque.</p>
+          <p class="carte-sub">Toute la carte, à commander sur Uber Eats.</p>
           <div class="carte-progress" aria-hidden="true"><span></span></div>
         </header>
         <div class="panels" data-panels></div>
@@ -124,7 +126,7 @@
         <p class="eyebrow"><span class="new-tag">Nouveau</span></p>
         <h2 id="trompe-h" class="h2">Les trompe-l&rsquo;&oelig;il</h2>
         <p class="lead">Des p&acirc;tisseries qui ressemblent &agrave; de vrais fruits. Framboise, citron, cacahu&egrave;te, mangue&hellip; On croit voir un fruit, on croque un dessert.</p>
-        <p class="small">Prix et parfums du jour au kiosque.</p>
+        <p class="small">Parfums du jour au kiosque.</p>
       </div>
       <div class="trompe-grid">
         <figure class="tcard t1"><img src="/img/photo/trompe-framboise.webp" alt="P&acirc;tisserie trompe-l&rsquo;&oelig;il framboise devant le kiosque Waffle Truck" loading="lazy" width="1179" height="1165"><figcaption>Framboise</figcaption></figure>
@@ -180,7 +182,7 @@
     <!-- LIVRAISON : Uber Eats link only, no Uber prices (KOS, 23 Nov 2026) -->
     <section id="livraison" class="livraison" aria-labelledby="liv-h">
       <div class="liv-card">
-        <img src="/img/cut/frites-box.webp" alt="" class="liv-art" loading="lazy" width="492" height="510">
+        <img src="/img/cut/churros-cup.webp" alt="" class="liv-art" loading="lazy" width="427" height="571">
         <div class="liv-txt">
           <p class="eyebrow">Livraison</p>
           <h2 id="liv-h" class="h2">Livré chez toi</h2>
@@ -188,7 +190,6 @@
           <p class="tickets-h">Tickets resto acceptés</p>
           <ul class="tickets" data-tickets></ul>
           <a class="btn btn-uber" data-uber target="_blank" rel="noopener" data-magnetic>Commander sur Uber Eats</a>
-          <p class="small">Les prix en livraison sont ceux de l’appli.</p>
         </div>
       </div>
       <!-- owner's Uber Eats photos (23 Nov 2026), names only -->

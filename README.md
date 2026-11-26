@@ -19,7 +19,7 @@ npm run preview    # http://localhost:4185 (built version)
 Or from the Claude app: launch config `waffle-demos` (dev) / `waffle-demos-dist`.
 
 ## Files
-- `shared/menu.js` — **all prices** (one place for the 3 demos). Source: `../menu-waffle-truck.md`.
+- `shared/menu.js` — **all prices** (one place for the 3 demos and the TVs). Source: `../menu-waffle-truck.md`. Demo 2 (the live site) does not show them any more (26 Nov 2026).
 - `shared/info.js` — address, phone, hours, Maps link, review paraphrases. Source: `../business-info.md`.
 - `shared/motion.js`, `shared/render.js` — smooth scroll, text split, reveals, counters, info filling.
 - `public/img/` — images built by `tools/build_assets.py` from the owner's photos (run with `py` from `sites/waffle Truck`).

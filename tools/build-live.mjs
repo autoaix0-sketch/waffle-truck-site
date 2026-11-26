@@ -19,7 +19,20 @@ execSync('npx vite build', { cwd: root, stdio: 'inherit' })
 rmSync(live, { recursive: true, force: true })
 mkdirSync(live)
 cpSync(resolve(dist, '02-golden-crunch/index.html'), resolve(live, 'index.html'))
-cpSync(resolve(dist, 'assets'), resolve(live, 'assets'), { recursive: true })
+// Copy only the assets Demo 2 really loads (its own JS/CSS + the shared chunks it imports),
+// not the chunks of the unused demos 01 and 03 (26 Nov 2026: they carry price data and must not be published).
+mkdirSync(resolve(live, 'assets'))
+const todo = [...readFileSync(resolve(live, 'index.html'), 'utf8').matchAll(/\/assets\/([^"'\s)?#,]+)/g)].map((m) => m[1])
+const seen = new Set()
+while (todo.length) {
+  const f = todo.pop()
+  if (seen.has(f)) continue
+  seen.add(f)
+  cpSync(resolve(dist, 'assets', f), resolve(live, 'assets', f))
+  if (f.endsWith('.js')) {
+    for (const m of readFileSync(resolve(dist, 'assets', f), 'utf8').matchAll(/(?:from|import)\s*\(?\s*["']\.\/([^"']+\.(?:js|css))["']/g)) todo.push(m[1])
+  }
+}
 cpSync(resolve(dist, 'img'), resolve(live, 'img'), { recursive: true })
 
 let html = readFileSync(resolve(live, 'index.html'), 'utf8')

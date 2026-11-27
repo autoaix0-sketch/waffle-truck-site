@@ -2,7 +2,7 @@
 white sticker border). KOS: keep the white border. One transparent WebP per item, in demos/public/img/cut/sticker/.
 
 Run from sites/waffle Truck:  py demos/tools/build_stickers.py
-Source kept in images/2026-11-27-stickers/sheet.jpg. Previews in demos/_qa/stickers-*.png.
+Source kept in images/2026-11-27-stickers/sheet.jpg (original) and sheet-ai-x2.jpg (used). Previews in demos/_qa/stickers-*.png.
 The old cut-outs (img/cut/*.webp) are not touched: Demos 01/03 and the menu TVs still use them.
 """
 from pathlib import Path
@@ -22,10 +22,13 @@ SEEDS = {
     "gaufre-fraise": (125, 870), "bt-lacte": (295, 890), "bt-fruits-rouges": (385, 890),
     "bt-mangue": (478, 890), "bt-violet": (572, 890), "frites-box": (700, 850), "frappe-cup": (850, 900),
 }
-SCALE = 2
+SCALE = 1   # the AI sheet is already 2x
 TEAS = ["bt-lacte", "bt-fruits-rouges", "bt-mangue", "bt-violet"]
 
-im = Image.open("images/2026-11-27-stickers/sheet.jpg").convert("RGB")
+# AI upscale x2 of the sheet (Pixelcut, free tier: 4x needs Pro), 2048 x 2048: much less blur than our own resize
+im = Image.open("images/2026-11-27-stickers/sheet-ai-x2.jpg").convert("RGB")
+F = im.width // 1024           # seeds are in 1024-px sheet pixels
+SEEDS = {k: (x * F, y * F) for k, (x, y) in SEEDS.items()}
 a = np.asarray(im).astype(int)
 mx, mn = a.max(2), a.min(2)
 # checker = black (~0) and dark grey (~83) squares, neutral. The white border closes every sticker.
@@ -33,32 +36,32 @@ cand = (mx <= 110) & ((mx - mn) <= 12)
 lab, _ = ndi.label(cand)
 border = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
 fg = ~np.isin(lab, border[border > 0])
-fg = ndi.binary_opening(fg, iterations=2)          # checker seams
+fg = ndi.binary_opening(fg, iterations=2 * F)          # checker seams
 fg = ndi.binary_fill_holes(fg)
 
 # stickers that touch: split them by eroding, take the part under the seed, grow it back inside fg
-core = ndi.binary_erosion(fg, iterations=4)
+core = ndi.binary_erosion(fg, iterations=4 * F)
 clab, _ = ndi.label(core)
-big = im.resize((im.width * SCALE, im.height * SCALE), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=2, percent=60, threshold=2))
+big = im if SCALE == 1 else im.resize((im.width * SCALE, im.height * SCALE), Image.LANCZOS)
 for name, (x, y) in SEEDS.items():
     k = clab[y, x]
     if not k:
         raise SystemExit(f"{name}: seed is not inside a sticker")
-    part = ndi.binary_dilation(clab == k, iterations=5) & fg
+    part = ndi.binary_dilation(clab == k, iterations=5 * F) & fg
     if name in TEAS:
         # the 4 teas touch: cut the joined block at the narrowest column between this tea and its neighbours
         cols = part.sum(0)
         i = TEAS.index(name)
         xs = [SEEDS[t][0] for t in TEAS]
         def neck(x0, x1):
-            lo, hi = (x0 + x1) // 2 - 25, (x0 + x1) // 2 + 25
+            lo, hi = (x0 + x1) // 2 - 25 * F, (x0 + x1) // 2 + 25 * F
             return lo + int(np.argmin(cols[lo:hi]))
         left = neck(xs[i - 1], xs[i]) if i else 0
         right = neck(xs[i], xs[i + 1]) if i < len(TEAS) - 1 else part.shape[1]
         part[:, :left] = False
         part[:, right:] = False
     part = ndi.binary_fill_holes(part)
-    part = ndi.binary_erosion(part, iterations=1)  # drop the dark fringe just outside the white border
+    part = ndi.binary_erosion(part, iterations=F)  # drop the dark fringe just outside the white border
     mask = Image.fromarray((part * 255).astype(np.uint8)).resize(big.size, Image.BICUBIC).filter(ImageFilter.GaussianBlur(1.2))
     out = big.copy()
     out.putalpha(mask)

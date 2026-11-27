@@ -90,6 +90,9 @@ em { font-style: italic; color: var(--caramel); }
 .panel .art .duo { display: flex; align-items: end; justify-content: center; position: relative; }
 .panel .art .duo img { max-height: 230px; max-width: 50%; }
 .panel .art .duo img + img { margin-left: -6%; }
+/* 4 bubble tea stickers in a row (27 Nov 2026) */
+.panel .art .quad img { max-height: 200px; max-width: 27%; }
+.panel .art .quad img + img { margin-left: -3%; }
 .panel h3 { font: 800 clamp(28px, 3vw, 40px)/1.05 var(--serif); margin: 0 0 4px; color: var(--honey); }
 .panel .sub { margin: 0 0 18px; opacity: .75; font-size: 15px; }
 .panel h4 { font: 700 15px/1.2 var(--sans); text-transform: uppercase; letter-spacing: .1em; margin: 16px 0 6px; color: var(--honey); }
@@ -147,6 +150,7 @@ address a { color: var(--caramel); font-weight: 700; }
   .panel { scroll-snap-align: center; grid-template-columns: 1fr; width: 88vw; padding: 24px; min-height: 0; }
   .panel .art img { max-height: 190px; }
   .panel .art .duo img { max-height: 170px; }
+  .panel .art .quad img { max-height: 140px; }
   .lieu { grid-template-columns: 1fr; grid-template-areas: 'txt' 'big'; }
   .reveal-img.big { aspect-ratio: 4 / 3; }
   .reveal-img.small { justify-self: stretch; max-width: none; }

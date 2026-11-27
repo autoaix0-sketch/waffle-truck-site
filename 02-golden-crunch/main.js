@@ -39,7 +39,7 @@ function cups() {
   const parts = (d) => d.pick.map((c, i) => (c ? (lbl[i] ? `${lbl[i]} ${c.toLowerCase()}` : c) : null)).filter(Boolean)
 
   track.innerHTML = list.map((d, i) => `
-    <figure class="cup" data-i="${i}">${img(d.img, `Bubble waffle ${d.name}`, 'cup-img', true)}
+    <figure class="cup" data-i="${i}">${img(d.img.replace('cut/', 'cut/sticker/'), `Bubble waffle ${d.name}`, 'cup-img', true)}
       <figcaption><b>${d.name}</b><span>${parts(d).join(' · ')}</span></figcaption></figure>`).join('')
   const figs = [...track.children]
 
@@ -157,7 +157,7 @@ P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/area
   <h3>Les OVNI</h3><p class="sub">Les burgers venus d'ailleurs · pain pressé</p>
   <ul class="mlist">${ovnis.map((o) => row(o.name, o.desc)).join('')}</ul>${fbox(formulas.ovni)}
   <h4>OVNI d'hiver</h4><ul class="mlist">${ovnisHiver.items.map((o) => row(o.name, o.desc)).join('')}${row('Menu Complet', ovnisHiver.menuComplet.detail)}${row('Area Express', ovnisHiver.areaExpress.detail)}</ul>${order()}</div></article>`)
-P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/churros.webp', 'Churros')}${img('cut/crepe-nutella.webp', 'Crêpe Nutella')}</div></div><div>
+P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/sticker/churros.webp', 'Churros et sauce chocolat')}${img('cut/sticker/crepe-nutella.webp', 'Crêpe Nutella')}</div></div><div>
   <h3>La pause ultra gourmande</h3><p class="sub">Waffles, churros, crêpes et beignets</p>
   <ul class="mlist">${row('Bubble Waffle', 'Base nature, chocolat ou matcha, à composer')}${desserts.churros.map((c) => row(c.name)).join('')}${desserts.crepes.map((c) => row(c.name)).join('')}${row('Beignet', desserts.beignets.flavours.join(' · '))}${row('La Pause Café', desserts.pauseCafe.detail)}</ul>
   <p class="note">Suppléments au choix : Chantilly, Bueno, Banane</p>${order()}</div></article>`)
@@ -165,11 +165,11 @@ P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/dame
   <h3>Glaces</h3><p class="sub">${glaces.parfums.join(' · ')}</p>
   <ul class="mlist">${row('Boules de glace', '1, 2 ou 3 boules, les parfums de ton choix')}</ul>
   <h4>Coupes les plus vendues</h4><ul class="mlist cols">${glaces.coupes.map((c) => row(c.name, c.desc)).join('')}</ul><p class="note">${glaces.note}</p>${order()}</div></article>`)
-P.push(`<article class="panel"><div class="art">${img('cut/pause-cafe.webp', 'Café et crêpe')}</div><div>
+P.push(`<article class="panel"><div class="art">${img('cut/sticker/frappe-cup.webp', 'Frappé Waffle Truck avec chantilly et chocolat')}</div><div>
   <h3>Cafés &amp; chocolats</h3><p class="sub">Pour la pause café, sur place ou à emporter</p>
   <ul class="mlist cols">${boissonsChaudes.cafes.map(([a, , t]) => row(a, '', t)).join('')}</ul>
   <h4>Chocolats chauds</h4><ul class="mlist">${boissonsChaudes.chocolats.map(([a, , t]) => row(a, '', t)).join('')}</ul>${order()}</div></article>`)
-P.push(`<article class="panel"><div class="art"><div class="duo">${img('cut/bt-mangue.webp', 'Bubble tea mangue')}${img('cut/bt-fruits-rouges.webp', 'Bubble tea fruits rouges')}</div></div><div>
+P.push(`<article class="panel"><div class="art"><div class="duo quad">${img('cut/sticker/bt-lacte.webp', 'Bubble tea lacté')}${img('cut/sticker/bt-fruits-rouges.webp', 'Bubble tea fruits rouges')}${img('cut/sticker/bt-mangue.webp', 'Bubble tea mangue')}${img('cut/sticker/bt-violet.webp', 'Bubble tea violet')}</div></div><div>
   <h3>Bubble tea &amp; boissons fraîches</h3><p class="sub">Base fruitée ou lactée · ${bubbleTea.sirops.length} sirops · perles fruitées ou tapioca</p>
   <ul class="mlist">${row('Bubble tea', bubbleTea.formats.map((f) => `${f.name} ${f.size}`).join(' · '))}
   ${boissonsFroides.map((d) => row(d.name, `${d.items}${d.prices.length > 1 ? ' · 35 cl / 75 cl' : ''}`)).join('')}</ul>${order()}</div></article>`)
